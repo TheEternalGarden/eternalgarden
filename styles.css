@@ -79,6 +79,9 @@ body {
     display: block;
     padding: 10px;
     transition: color 0.3s ease;
+    text-transform: uppercase;
+    font-family: Helvetica, Arial, sans-serif;
+    letter-spacing: 1px;
 }
 
 .menu-items a:hover {
