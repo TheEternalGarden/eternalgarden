@@ -18,7 +18,7 @@ body {
 
 .hamburger-icon {
     width: 30px;
-    height: 24px;
+    height: 25px;
     position: relative;
     cursor: pointer;
 }
@@ -38,10 +38,49 @@ body {
 }
 
 .hamburger-icon span:nth-child(2) {
-    top: 50%;
-    transform: translateY(-50%);
+    top: 11px;
 }
 
 .hamburger-icon span:nth-child(3) {
-    bottom: 0;
+    top: 22px;
+}
+
+/* Menu Items Styles */
+.menu-items {
+    position: fixed;
+    top: 0;
+    right: -250px;
+    width: 250px;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 80px 20px 20px;
+    transition: right 0.3s ease;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.menu-items.active {
+    right: 0;
+}
+
+.menu-items ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-items li {
+    margin: 15px 0;
+}
+
+.menu-items a {
+    color: #333;
+    text-decoration: none;
+    font-size: 18px;
+    display: block;
+    padding: 10px;
+    transition: color 0.3s ease;
+}
+
+.menu-items a:hover {
+    color: #666;
 } 
