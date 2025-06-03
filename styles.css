@@ -112,4 +112,28 @@ body {
 /* Ensure menu stays above video */
 .hamburger-menu {
     z-index: 1000;
+}
+
+/* Volume Toggle Button */
+.volume-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.7);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 1000;
+    transition: background-color 0.3s ease;
+}
+
+.volume-toggle:hover {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.volume-toggle.muted {
+    background: rgba(255, 255, 255, 0.4);
 } 

@@ -14,4 +14,27 @@ document.addEventListener('DOMContentLoaded', () => {
             hamburgerIcon.classList.remove('active');
         }
     });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const video = document.querySelector('video');
+    const volumeToggle = document.getElementById('volumeToggle');
+    
+    // Ensure video is playing
+    video.play().catch(function(error) {
+        console.log("Video autoplay failed:", error);
+    });
+
+    // Volume toggle functionality
+    volumeToggle.addEventListener('click', function() {
+        if (video.muted) {
+            video.muted = false;
+            volumeToggle.textContent = '🔊';
+            volumeToggle.classList.remove('muted');
+        } else {
+            video.muted = true;
+            volumeToggle.textContent = '🔇';
+            volumeToggle.classList.add('muted');
+        }
+    });
 }); 
