@@ -4,6 +4,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const video = document.querySelector('video');
     const volumeToggle = document.getElementById('volumeToggle');
 
+    // Set initial video state
+    video.muted = true;
+    video.volume = 1;
+
     // Hamburger menu functionality
     hamburgerIcon.addEventListener('click', () => {
         menuItems.classList.toggle('active');
@@ -28,10 +32,17 @@ document.addEventListener('DOMContentLoaded', () => {
             video.volume = 1;
             volumeToggle.textContent = '🔊';
             volumeToggle.classList.remove('muted');
+            console.log('Unmuted video');
         } else {
             video.muted = true;
             volumeToggle.textContent = '🔇';
             volumeToggle.classList.add('muted');
+            console.log('Muted video');
         }
+    });
+
+    // Ensure video is playing
+    video.play().catch(error => {
+        console.error('Error playing video:', error);
     });
 }); 
