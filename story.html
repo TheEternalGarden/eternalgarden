@@ -16,6 +16,7 @@
             height: 100vh;
             align-items: center;
             justify-content: flex-start;
+            position: relative;
         }
         .horizontal-gallery img {
             flex: 0 0 100vw;
@@ -37,6 +38,7 @@
         body {
             margin: 0;
             background: #fff;
+            overflow: hidden;
         }
         /* Hide scrollbar for cleaner look */
         .horizontal-gallery::-webkit-scrollbar {
@@ -46,18 +48,73 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+        /* Navigation indicators */
+        .nav-indicators {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+        .nav-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .nav-dot.active {
+            background: #fff;
+        }
     </style>
 </head>
 <body>
-    <div class="horizontal-gallery">
-        <img src="media/images/story/1.jpg" alt="Story Image 1">
-        <img src="media/images/story/2.jpg" alt="Story Image 2">
-        <img src="media/images/story/3.png" alt="Story Image 3">
-        <img src="media/images/story/4.jpg" alt="Story Image 4">
-        <img src="media/images/story/5.jpg" alt="Story Image 5">
-        <img src="media/images/story/6.jpg" alt="Story Image 6">
-        <img src="media/images/story/7.jpg" alt="Story Image 7">
-        <img src="media/images/story/8.jpg" alt="Story Image 8">
+    <div class="horizontal-gallery" id="gallery">
+        <img src="media/images2/story/1.jpg" alt="Story Image 1">
+        <img src="media/images2/story/2.jpg" alt="Story Image 2">
+        <img src="media/images2/story/3.png" alt="Story Image 3">
+        <img src="media/images2/story/4.jpg" alt="Story Image 4">
+        <img src="media/images2/story/5.jpg" alt="Story Image 5">
+        <img src="media/images2/story/6.jpg" alt="Story Image 6">
+        <img src="media/images2/story/7.jpg" alt="Story Image 7">
+        <img src="media/images2/story/8.jpg" alt="Story Image 8">
     </div>
+    <div class="nav-indicators" id="navIndicators"></div>
+
+    <script>
+        // Create navigation dots
+        const gallery = document.getElementById('gallery');
+        const navIndicators = document.getElementById('navIndicators');
+        const images = gallery.getElementsByTagName('img');
+        
+        for (let i = 0; i < images.length; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'nav-dot';
+            dot.addEventListener('click', () => {
+                gallery.scrollTo({
+                    left: i * window.innerWidth,
+                    behavior: 'smooth'
+                });
+            });
+            navIndicators.appendChild(dot);
+        }
+
+        // Update active dot on scroll
+        gallery.addEventListener('scroll', () => {
+            const scrollPosition = gallery.scrollLeft;
+            const activeIndex = Math.round(scrollPosition / window.innerWidth);
+            const dots = navIndicators.getElementsByClassName('nav-dot');
+            
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].classList.toggle('active', i === activeIndex);
+            }
+        });
+
+        // Initialize first dot as active
+        navIndicators.firstChild.classList.add('active');
+    </script>
 </body>
 </html> 
