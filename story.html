@@ -10,26 +10,41 @@
             display: flex;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
-            gap: 40px;
-            padding: 40px 0;
+            gap: 0;
+            padding: 0;
             background: #fff;
             height: 100vh;
             align-items: center;
+            justify-content: flex-start;
         }
         .horizontal-gallery img {
-            max-height: 80vh;
-            width: auto;
-            border-radius: 12px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+            flex: 0 0 100vw;
+            max-width: 100vw;
+            max-height: 100vh;
+            width: 100vw;
+            height: 100vh;
+            object-fit: contain;
+            border-radius: 0;
+            box-shadow: none;
             scroll-snap-align: center;
             transition: transform 0.3s;
+            background: #fff;
+            display: block;
         }
         .horizontal-gallery img:hover {
-            transform: scale(1.04);
+            transform: scale(1.01);
         }
         body {
             margin: 0;
             background: #fff;
+        }
+        /* Hide scrollbar for cleaner look */
+        .horizontal-gallery::-webkit-scrollbar {
+            display: none;
+        }
+        .horizontal-gallery {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
     </style>
 </head>
