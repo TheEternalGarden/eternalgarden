@@ -17,6 +17,8 @@
             align-items: center;
             justify-content: flex-start;
             position: relative;
+            width: 100vw;
+            -webkit-overflow-scrolling: touch;
         }
         .horizontal-gallery img {
             flex: 0 0 100vw;
@@ -69,9 +71,39 @@
         .nav-dot.active {
             background: #fff;
         }
+        .arrow {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.3);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+        .arrow:hover {
+            opacity: 1;
+        }
+        .arrow.left {
+            left: 10px;
+        }
+        .arrow.right {
+            right: 10px;
+        }
     </style>
 </head>
 <body>
+    <button class="arrow left" id="arrowLeft" aria-label="Previous image">&#8592;</button>
+    <button class="arrow right" id="arrowRight" aria-label="Next image">&#8594;</button>
     <div class="horizontal-gallery" id="gallery">
         <img src="media/images2/1.jpg" alt="Story Image 1">
         <img src="media/images2/2.jpg" alt="Story Image 2">
@@ -85,11 +117,13 @@
     <div class="nav-indicators" id="navIndicators"></div>
 
     <script>
-        // Create navigation dots
         const gallery = document.getElementById('gallery');
         const navIndicators = document.getElementById('navIndicators');
         const images = gallery.getElementsByTagName('img');
-        
+        const arrowLeft = document.getElementById('arrowLeft');
+        const arrowRight = document.getElementById('arrowRight');
+        let currentIndex = 0;
+
         for (let i = 0; i < images.length; i++) {
             const dot = document.createElement('div');
             dot.className = 'nav-dot';
@@ -102,19 +136,40 @@
             navIndicators.appendChild(dot);
         }
 
-        // Update active dot on scroll
-        gallery.addEventListener('scroll', () => {
+        function updateActiveDot() {
             const scrollPosition = gallery.scrollLeft;
             const activeIndex = Math.round(scrollPosition / window.innerWidth);
             const dots = navIndicators.getElementsByClassName('nav-dot');
-            
             for (let i = 0; i < dots.length; i++) {
                 dots[i].classList.toggle('active', i === activeIndex);
             }
-        });
-
-        // Initialize first dot as active
+            currentIndex = activeIndex;
+        }
+        gallery.addEventListener('scroll', updateActiveDot);
         navIndicators.firstChild.classList.add('active');
+
+        arrowLeft.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                gallery.scrollTo({
+                    left: currentIndex * window.innerWidth,
+                    behavior: 'smooth'
+                });
+            }
+        });
+        arrowRight.addEventListener('click', () => {
+            if (currentIndex < images.length - 1) {
+                currentIndex++;
+                gallery.scrollTo({
+                    left: currentIndex * window.innerWidth,
+                    behavior: 'smooth'
+                });
+            }
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') arrowLeft.click();
+            if (e.key === 'ArrowRight') arrowRight.click();
+        });
     </script>
 </body>
 </html> 
