@@ -178,8 +178,8 @@
             <div class="nav-indicators gallery2-indicators"></div>
         </div>
     </section>
-
     <script>
+        console.log("Script loaded");
         function setupGallery(galleryId, leftArrowClass, rightArrowClass, indicatorsClass) {
             const gallery = document.getElementById(galleryId);
             const images = gallery.getElementsByTagName('img');
@@ -189,18 +189,15 @@
             let currentIndex = 0;
 
             function scrollToIndex(index) {
-                console.log('Scrolling to index:', index);
                 gallery.scrollTo({
                     left: index * window.innerWidth,
                     behavior: 'smooth'
                 });
-                // Fallback: set scrollLeft directly
                 gallery.scrollLeft = index * window.innerWidth;
                 currentIndex = index;
                 updateActiveDot();
             }
 
-            // Create nav dots
             navIndicators.innerHTML = '';
             for (let i = 0; i < images.length; i++) {
                 const dot = document.createElement('div');
@@ -225,7 +222,6 @@
 
             arrowLeft.addEventListener('click', () => {
                 console.log('Left arrow clicked');
-                console.log('gallery.scrollLeft:', gallery.scrollLeft, 'gallery.clientWidth:', gallery.clientWidth, 'gallery.scrollWidth:', gallery.scrollWidth);
                 gallery.scrollBy({
                     left: -gallery.clientWidth,
                     behavior: 'smooth'
@@ -233,7 +229,6 @@
             });
             arrowRight.addEventListener('click', () => {
                 console.log('Right arrow clicked');
-                console.log('gallery.scrollLeft:', gallery.scrollLeft, 'gallery.clientWidth:', gallery.clientWidth, 'gallery.scrollWidth:', gallery.scrollWidth);
                 gallery.scrollBy({
                     left: gallery.clientWidth,
                     behavior: 'smooth'
