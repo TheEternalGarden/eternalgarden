@@ -168,6 +168,20 @@
     </style>
 </head>
 <body>
+    <div class="hamburger-menu">
+        <div class="hamburger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav class="menu-items">
+            <ul>
+                <li><a href="story.html">Story</a></li>
+                <li><a href="soundtrack.html">Soundtrack</a></li>
+                <li><a href="zero.html">Zero</a></li>
+            </ul>
+        </nav>
+    </div>
     <h1 class="title" id="prologueTitle">THE STORY // PROLOGUE</h1>
     <section class="story-section">
         <div class="gallery-wrapper">
@@ -342,6 +356,24 @@
         // Setup third gallery (empty for now, ready for images)
         // Uncomment and update when images are added
         // setupGallery('gallery3', 'gallery3-bubbles');
+
+        // Hamburger menu functionality for story page
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamburgerIcon = document.querySelector('.hamburger-icon');
+            const menuItems = document.querySelector('.menu-items');
+
+            hamburgerIcon.addEventListener('click', () => {
+                menuItems.classList.toggle('active');
+                hamburgerIcon.classList.toggle('active');
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!hamburgerIcon.contains(e.target) && !menuItems.contains(e.target)) {
+                    menuItems.classList.remove('active');
+                    hamburgerIcon.classList.remove('active');
+                }
+            });
+        });
     </script>
 </body>
 </html> 
