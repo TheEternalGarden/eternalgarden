@@ -145,37 +145,105 @@
 <body>
     <h1 class="title">THE STORY // PROLOGUE</h1>
     <section class="story-section">
-        <button class="arrow left" id="arrowLeft" aria-label="Previous image">&#8592;</button>
-        <button class="arrow right" id="arrowRight" aria-label="Next image">&#8594;</button>
-        <div class="horizontal-gallery" id="gallery">
-            <img src="media/images2/1.jpg" alt="Story Image 1">
-            <img src="media/images2/2.jpg" alt="Story Image 2">
-            <img src="media/images2/3.png" alt="Story Image 3">
-            <img src="media/images2/4.jpg" alt="Story Image 4">
-            <img src="media/images2/5.jpg" alt="Story Image 5">
-            <img src="media/images2/6.jpg" alt="Story Image 6">
-            <img src="media/images2/7.jpg" alt="Story Image 7">
-            <img src="media/images2/8.jpg" alt="Story Image 8">
+        <div class="gallery-wrapper">
+            <button class="arrow left gallery1-arrow-left" aria-label="Previous image">&#8592;</button>
+            <button class="arrow right gallery1-arrow-right" aria-label="Next image">&#8594;</button>
+            <div class="horizontal-gallery" id="gallery1">
+                <img src="media/images2/1.jpg" alt="Story Image 1">
+                <img src="media/images2/2.jpg" alt="Story Image 2">
+                <img src="media/images2/3.png" alt="Story Image 3">
+                <img src="media/images2/4.jpg" alt="Story Image 4">
+                <img src="media/images2/5.jpg" alt="Story Image 5">
+                <img src="media/images2/6.jpg" alt="Story Image 6">
+                <img src="media/images2/7.jpg" alt="Story Image 7">
+                <img src="media/images2/8.jpg" alt="Story Image 8">
+            </div>
+            <div class="nav-indicators gallery1-indicators"></div>
         </div>
-        <div class="nav-indicators" id="navIndicators"></div>
     </section>
     <section class="story-section empty-section">
         <h2 class="gallery-title">VISITORS</h2>
-        <button class="arrow left" id="arrowLeft2" aria-label="Previous image">&#8592;</button>
-        <button class="arrow right" id="arrowRight2" aria-label="Next image">&#8594;</button>
-        <div class="horizontal-gallery" id="gallery2">
-            <img src="media/images2/visitors/9.jpg" alt="Visitor Image 9">
-            <img src="media/images2/visitors/10.jpg" alt="Visitor Image 10">
-            <img src="media/images2/visitors/11.jpg" alt="Visitor Image 11">
-            <img src="media/images2/visitors/12.jpg" alt="Visitor Image 12">
-            <img src="media/images2/visitors/13.jpg" alt="Visitor Image 13">
-            <img src="media/images2/visitors/14.jpg" alt="Visitor Image 14">
-            <img src="media/images2/visitors/15.jpg" alt="Visitor Image 15">
+        <div class="gallery-wrapper">
+            <button class="arrow left gallery2-arrow-left" aria-label="Previous image">&#8592;</button>
+            <button class="arrow right gallery2-arrow-right" aria-label="Next image">&#8594;</button>
+            <div class="horizontal-gallery" id="gallery2">
+                <img src="media/images2/visitors/9.jpg" alt="Visitor Image 9">
+                <img src="media/images2/visitors/10.jpg" alt="Visitor Image 10">
+                <img src="media/images2/visitors/11.jpg" alt="Visitor Image 11">
+                <img src="media/images2/visitors/12.jpg" alt="Visitor Image 12">
+                <img src="media/images2/visitors/13.jpg" alt="Visitor Image 13">
+                <img src="media/images2/visitors/14.jpg" alt="Visitor Image 14">
+                <img src="media/images2/visitors/15.jpg" alt="Visitor Image 15">
+            </div>
+            <div class="nav-indicators gallery2-indicators"></div>
         </div>
-        <div class="nav-indicators" id="navIndicators2"></div>
     </section>
 
     <script>
+        function setupGallery(galleryId, leftArrowClass, rightArrowClass, indicatorsClass) {
+            const gallery = document.getElementById(galleryId);
+            const images = gallery.getElementsByTagName('img');
+            const arrowLeft = document.querySelector('.' + leftArrowClass);
+            const arrowRight = document.querySelector('.' + rightArrowClass);
+            const navIndicators = document.querySelector('.' + indicatorsClass);
+            let currentIndex = 0;
+
+            // Create nav dots
+            navIndicators.innerHTML = '';
+            for (let i = 0; i < images.length; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'nav-dot';
+                dot.addEventListener('click', () => {
+                    gallery.scrollTo({
+                        left: i * window.innerWidth,
+                        behavior: 'smooth'
+                    });
+                });
+                navIndicators.appendChild(dot);
+            }
+            navIndicators.firstChild.classList.add('active');
+
+            function updateActiveDot() {
+                const scrollPosition = gallery.scrollLeft;
+                const activeIndex = Math.round(scrollPosition / window.innerWidth);
+                const dots = navIndicators.getElementsByClassName('nav-dot');
+                for (let i = 0; i < dots.length; i++) {
+                    dots[i].classList.toggle('active', i === activeIndex);
+                }
+                currentIndex = activeIndex;
+            }
+            gallery.addEventListener('scroll', updateActiveDot);
+
+            arrowLeft.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    gallery.scrollTo({
+                        left: currentIndex * window.innerWidth,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+            arrowRight.addEventListener('click', () => {
+                if (currentIndex < images.length - 1) {
+                    currentIndex++;
+                    gallery.scrollTo({
+                        left: currentIndex * window.innerWidth,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+
+            return {
+                gallery,
+                arrowLeft,
+                arrowRight
+            };
+        }
+
+        // Setup both galleries
+        const gallery1 = setupGallery('gallery1', 'gallery1-arrow-left', 'gallery1-arrow-right', 'gallery1-indicators');
+        const gallery2 = setupGallery('gallery2', 'gallery2-arrow-left', 'gallery2-arrow-right', 'gallery2-indicators');
+
         function isElementInViewport(el) {
             const rect = el.getBoundingClientRect();
             return (
@@ -184,117 +252,15 @@
             );
         }
 
-        // First gallery
-        const gallery = document.getElementById('gallery');
-        const navIndicators = document.getElementById('navIndicators');
-        const images = gallery.getElementsByTagName('img');
-        const arrowLeft = document.getElementById('arrowLeft');
-        const arrowRight = document.getElementById('arrowRight');
-        let currentIndex = 0;
-
-        for (let i = 0; i < images.length; i++) {
-            const dot = document.createElement('div');
-            dot.className = 'nav-dot';
-            dot.addEventListener('click', () => {
-                gallery.scrollTo({
-                    left: i * window.innerWidth,
-                    behavior: 'smooth'
-                });
-            });
-            navIndicators.appendChild(dot);
-        }
-
-        function updateActiveDot() {
-            const scrollPosition = gallery.scrollLeft;
-            const activeIndex = Math.round(scrollPosition / window.innerWidth);
-            const dots = navIndicators.getElementsByClassName('nav-dot');
-            for (let i = 0; i < dots.length; i++) {
-                dots[i].classList.toggle('active', i === activeIndex);
-            }
-            currentIndex = activeIndex;
-        }
-        gallery.addEventListener('scroll', updateActiveDot);
-        navIndicators.firstChild.classList.add('active');
-
-        arrowLeft.addEventListener('click', () => {
-            if (currentIndex > 0) {
-                currentIndex--;
-                gallery.scrollTo({
-                    left: currentIndex * window.innerWidth,
-                    behavior: 'smooth'
-                });
-            }
-        });
-        arrowRight.addEventListener('click', () => {
-            if (currentIndex < images.length - 1) {
-                currentIndex++;
-                gallery.scrollTo({
-                    left: currentIndex * window.innerWidth,
-                    behavior: 'smooth'
-                });
-            }
-        });
-
-        // Second gallery
-        const gallery2 = document.getElementById('gallery2');
-        const navIndicators2 = document.getElementById('navIndicators2');
-        const images2 = gallery2.getElementsByTagName('img');
-        const arrowLeft2 = document.getElementById('arrowLeft2');
-        const arrowRight2 = document.getElementById('arrowRight2');
-        let currentIndex2 = 0;
-
-        for (let i = 0; i < images2.length; i++) {
-            const dot2 = document.createElement('div');
-            dot2.className = 'nav-dot';
-            dot2.addEventListener('click', () => {
-                gallery2.scrollTo({
-                    left: i * window.innerWidth,
-                    behavior: 'smooth'
-                });
-            });
-            navIndicators2.appendChild(dot2);
-        }
-
-        function updateActiveDot2() {
-            const scrollPosition2 = gallery2.scrollLeft;
-            const activeIndex2 = Math.round(scrollPosition2 / window.innerWidth);
-            const dots2 = navIndicators2.getElementsByClassName('nav-dot');
-            for (let i = 0; i < dots2.length; i++) {
-                dots2[i].classList.toggle('active', i === activeIndex2);
-            }
-            currentIndex2 = activeIndex2;
-        }
-        gallery2.addEventListener('scroll', updateActiveDot2);
-        navIndicators2.firstChild.classList.add('active');
-
-        arrowLeft2.addEventListener('click', () => {
-            if (currentIndex2 > 0) {
-                currentIndex2--;
-                gallery2.scrollTo({
-                    left: currentIndex2 * window.innerWidth,
-                    behavior: 'smooth'
-                });
-            }
-        });
-        arrowRight2.addEventListener('click', () => {
-            if (currentIndex2 < images2.length - 1) {
-                currentIndex2++;
-                gallery2.scrollTo({
-                    left: currentIndex2 * window.innerWidth,
-                    behavior: 'smooth'
-                });
-            }
-        });
-
         // Arrow key navigation: only for gallery in view
         document.addEventListener('keydown', (e) => {
             if (document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
-                if (isElementInViewport(gallery) && isElementInViewport(arrowLeft) && isElementInViewport(arrowRight)) {
-                    if (e.key === 'ArrowLeft') arrowLeft.click();
-                    if (e.key === 'ArrowRight') arrowRight.click();
-                } else if (isElementInViewport(gallery2) && isElementInViewport(arrowLeft2) && isElementInViewport(arrowRight2)) {
-                    if (e.key === 'ArrowLeft') arrowLeft2.click();
-                    if (e.key === 'ArrowRight') arrowRight2.click();
+                if (isElementInViewport(gallery1.gallery)) {
+                    if (e.key === 'ArrowLeft') gallery1.arrowLeft.click();
+                    if (e.key === 'ArrowRight') gallery1.arrowRight.click();
+                } else if (isElementInViewport(gallery2.gallery)) {
+                    if (e.key === 'ArrowLeft') gallery2.arrowLeft.click();
+                    if (e.key === 'ArrowRight') gallery2.arrowRight.click();
                 }
             }
         });
