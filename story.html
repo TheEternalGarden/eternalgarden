@@ -264,6 +264,18 @@
                 }
             }
         });
+
+        // Ensure gallery2 starts at the first image when section comes into view
+        const section2 = document.querySelector('.empty-section');
+        let section2WasInView = false;
+        window.addEventListener('scroll', () => {
+            const rect = section2.getBoundingClientRect();
+            const inView = rect.top < window.innerHeight && rect.bottom > 0;
+            if (inView && !section2WasInView) {
+                gallery2.gallery.scrollLeft = 0;
+            }
+            section2WasInView = inView;
+        });
     </script>
 </body>
 </html> 
