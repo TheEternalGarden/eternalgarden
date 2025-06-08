@@ -188,16 +188,22 @@
             const navIndicators = document.querySelector('.' + indicatorsClass);
             let currentIndex = 0;
 
+            function scrollToIndex(index) {
+                gallery.scrollTo({
+                    left: index * window.innerWidth,
+                    behavior: 'smooth'
+                });
+                currentIndex = index;
+                updateActiveDot();
+            }
+
             // Create nav dots
             navIndicators.innerHTML = '';
             for (let i = 0; i < images.length; i++) {
                 const dot = document.createElement('div');
                 dot.className = 'nav-dot';
                 dot.addEventListener('click', () => {
-                    gallery.scrollTo({
-                        left: i * window.innerWidth,
-                        behavior: 'smooth'
-                    });
+                    scrollToIndex(i);
                 });
                 navIndicators.appendChild(dot);
             }
@@ -216,20 +222,12 @@
 
             arrowLeft.addEventListener('click', () => {
                 if (currentIndex > 0) {
-                    currentIndex--;
-                    gallery.scrollTo({
-                        left: currentIndex * window.innerWidth,
-                        behavior: 'smooth'
-                    });
+                    scrollToIndex(currentIndex - 1);
                 }
             });
             arrowRight.addEventListener('click', () => {
                 if (currentIndex < images.length - 1) {
-                    currentIndex++;
-                    gallery.scrollTo({
-                        left: currentIndex * window.innerWidth,
-                        behavior: 'smooth'
-                    });
+                    scrollToIndex(currentIndex + 1);
                 }
             });
 
