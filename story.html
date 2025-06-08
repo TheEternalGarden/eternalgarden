@@ -24,6 +24,9 @@
             border-radius: 3px;
             text-shadow: none;
         }
+        .title.hidden {
+            display: none;
+        }
         .horizontal-gallery {
             display: flex;
             overflow-x: auto;
@@ -165,7 +168,7 @@
     </style>
 </head>
 <body>
-    <h1 class="title">THE STORY // PROLOGUE</h1>
+    <h1 class="title" id="prologueTitle">THE STORY // PROLOGUE</h1>
     <section class="story-section">
         <div class="gallery-wrapper">
             <div class="horizontal-gallery" id="gallery1">
@@ -264,6 +267,14 @@
                 gallery2.gallery.scrollLeft = 0;
             }
             section2WasInView = inView;
+
+            // Hide the prologue title when page two is in view
+            const prologueTitle = document.getElementById('prologueTitle');
+            if (inView) {
+                prologueTitle.classList.add('hidden');
+            } else {
+                prologueTitle.classList.remove('hidden');
+            }
         });
     </script>
 </body>
