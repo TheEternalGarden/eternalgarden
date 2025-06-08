@@ -140,6 +140,28 @@
             color: #333;
             text-transform: uppercase;
         }
+        .bubble-indicators {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            margin: 24px 0 0 0;
+            padding: 0;
+            min-height: 40px;
+        }
+        .bubble-indicators .bubble {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #eee;
+            border: 2px solid #ccc;
+            cursor: pointer;
+            transition: background 0.2s, border 0.2s;
+        }
+        .bubble-indicators .bubble.active {
+            background: #333;
+            border-color: #333;
+        }
     </style>
 </head>
 <body>
@@ -156,7 +178,7 @@
                 <img src="media/images2/7.jpg" alt="Story Image 7">
                 <img src="media/images2/8.jpg" alt="Story Image 8">
             </div>
-            <div class="nav-indicators gallery1-indicators"></div>
+            <div class="bubble-indicators gallery1-bubbles"></div>
         </div>
     </section>
     <section class="story-section empty-section">
@@ -178,71 +200,41 @@
     </section>
     <script>
         console.log("Script loaded");
-        function setupGallery(galleryId, leftArrowClass, rightArrowClass, indicatorsClass) {
+        function setupGallery(galleryId, bubblesClass) {
             const gallery = document.getElementById(galleryId);
             const images = gallery.getElementsByTagName('img');
-            const arrowLeft = document.querySelector('.' + leftArrowClass);
-            const arrowRight = document.querySelector('.' + rightArrowClass);
-            const navIndicators = document.querySelector('.' + indicatorsClass);
+            const bubbleIndicators = document.querySelector('.' + bubblesClass);
             let currentIndex = 0;
 
-            function scrollToIndex(index) {
-                gallery.scrollTo({
-                    left: index * window.innerWidth,
-                    behavior: 'smooth'
-                });
-                gallery.scrollLeft = index * window.innerWidth;
-                currentIndex = index;
-                updateActiveDot();
-            }
-
-            navIndicators.innerHTML = '';
+            // Create bubbles
+            bubbleIndicators.innerHTML = '';
             for (let i = 0; i < images.length; i++) {
-                const dot = document.createElement('div');
-                dot.className = 'nav-dot';
-                dot.addEventListener('click', () => {
-                    scrollToIndex(i);
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                bubble.addEventListener('click', () => {
+                    gallery.scrollTo({
+                        left: i * window.innerWidth,
+                        behavior: 'smooth'
+                    });
                 });
-                navIndicators.appendChild(dot);
+                bubbleIndicators.appendChild(bubble);
             }
-            navIndicators.firstChild.classList.add('active');
+            bubbleIndicators.firstChild.classList.add('active');
 
-            function updateActiveDot() {
+            function updateActiveBubble() {
                 const scrollPosition = gallery.scrollLeft;
                 const activeIndex = Math.round(scrollPosition / window.innerWidth);
-                const dots = navIndicators.getElementsByClassName('nav-dot');
-                for (let i = 0; i < dots.length; i++) {
-                    dots[i].classList.toggle('active', i === activeIndex);
+                const bubbles = bubbleIndicators.getElementsByClassName('bubble');
+                for (let i = 0; i < bubbles.length; i++) {
+                    bubbles[i].classList.toggle('active', i === activeIndex);
                 }
                 currentIndex = activeIndex;
             }
-            gallery.addEventListener('scroll', updateActiveDot);
-
-            arrowLeft.addEventListener('click', () => {
-                console.log('Left arrow clicked');
-                gallery.scrollBy({
-                    left: -gallery.clientWidth,
-                    behavior: 'smooth'
-                });
-            });
-            arrowRight.addEventListener('click', () => {
-                console.log('Right arrow clicked');
-                gallery.scrollBy({
-                    left: gallery.clientWidth,
-                    behavior: 'smooth'
-                });
-            });
-
-            return {
-                gallery,
-                arrowLeft,
-                arrowRight
-            };
+            gallery.addEventListener('scroll', updateActiveBubble);
         }
 
-        // Setup both galleries
-        const gallery1 = setupGallery('gallery1', 'gallery1-arrow-left', 'gallery1-arrow-right', 'gallery1-indicators');
-        const gallery2 = setupGallery('gallery2', 'gallery2-arrow-left', 'gallery2-arrow-right', 'gallery2-indicators');
+        // Setup first gallery with bubbles
+        setupGallery('gallery1', 'gallery1-bubbles');
 
         function isElementInViewport(el) {
             const rect = el.getBoundingClientRect();
