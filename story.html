@@ -257,20 +257,12 @@
             }
         });
 
-        // Ensure gallery2 starts at the first image when section comes into view
-        const section2 = document.querySelector('.empty-section');
-        let section2WasInView = false;
+        // Hide the prologue title when user scrolls past the first section
+        const prologueTitle = document.getElementById('prologueTitle');
+        const firstSection = document.querySelector('.story-section');
         window.addEventListener('scroll', () => {
-            const rect = section2.getBoundingClientRect();
-            const inView = rect.top < window.innerHeight && rect.bottom > 0;
-            if (inView && !section2WasInView) {
-                gallery2.gallery.scrollLeft = 0;
-            }
-            section2WasInView = inView;
-
-            // Hide the prologue title when page two is in view
-            const prologueTitle = document.getElementById('prologueTitle');
-            if (inView) {
+            const firstSectionHeight = firstSection.offsetHeight;
+            if (window.scrollY >= firstSectionHeight - 10) {
                 prologueTitle.classList.add('hidden');
             } else {
                 prologueTitle.classList.remove('hidden');
