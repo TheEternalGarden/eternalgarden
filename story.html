@@ -224,14 +224,20 @@
             gallery.addEventListener('scroll', updateActiveDot);
 
             arrowLeft.addEventListener('click', () => {
-                if (currentIndex > 0) {
-                    scrollToIndex(currentIndex - 1);
-                }
+                console.log('Left arrow clicked');
+                console.log('gallery.scrollLeft:', gallery.scrollLeft, 'gallery.clientWidth:', gallery.clientWidth, 'gallery.scrollWidth:', gallery.scrollWidth);
+                gallery.scrollBy({
+                    left: -gallery.clientWidth,
+                    behavior: 'smooth'
+                });
             });
             arrowRight.addEventListener('click', () => {
-                if (currentIndex < images.length - 1) {
-                    scrollToIndex(currentIndex + 1);
-                }
+                console.log('Right arrow clicked');
+                console.log('gallery.scrollLeft:', gallery.scrollLeft, 'gallery.clientWidth:', gallery.clientWidth, 'gallery.scrollWidth:', gallery.scrollWidth);
+                gallery.scrollBy({
+                    left: gallery.clientWidth,
+                    behavior: 'smooth'
+                });
             });
 
             return {
