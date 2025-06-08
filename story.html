@@ -6,6 +6,22 @@
     <title>Story Gallery</title>
     <link rel="stylesheet" href="styles.css">
     <style>
+        .title {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #333;
+            font-size: 2rem;
+            font-family: Helvetica, Arial, sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            z-index: 1002;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
         .horizontal-gallery {
             display: flex;
             overflow-x: auto;
@@ -102,6 +118,7 @@
     </style>
 </head>
 <body>
+    <h1 class="title">THE STORY // PROLOGUE</h1>
     <button class="arrow left" id="arrowLeft" aria-label="Previous image">&#8592;</button>
     <button class="arrow right" id="arrowRight" aria-label="Next image">&#8594;</button>
     <div class="horizontal-gallery" id="gallery">
