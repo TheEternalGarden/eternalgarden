@@ -358,21 +358,19 @@
         // setupGallery('gallery3', 'gallery3-bubbles');
 
         // Hamburger menu functionality for story page
-        document.addEventListener('DOMContentLoaded', () => {
-            const hamburgerIcon = document.querySelector('.hamburger-icon');
-            const menuItems = document.querySelector('.menu-items');
+        const hamburgerIcon = document.querySelector('.hamburger-icon');
+        const menuItems = document.querySelector('.menu-items');
 
-            hamburgerIcon.addEventListener('click', () => {
-                menuItems.classList.toggle('active');
-                hamburgerIcon.classList.toggle('active');
-            });
+        hamburgerIcon.addEventListener('click', () => {
+            menuItems.classList.toggle('active');
+            hamburgerIcon.classList.toggle('active');
+        });
 
-            document.addEventListener('click', (e) => {
-                if (!hamburgerIcon.contains(e.target) && !menuItems.contains(e.target)) {
-                    menuItems.classList.remove('active');
-                    hamburgerIcon.classList.remove('active');
-                }
-            });
+        document.addEventListener('click', (e) => {
+            if (!hamburgerIcon.contains(e.target) && !menuItems.contains(e.target)) {
+                menuItems.classList.remove('active');
+                hamburgerIcon.classList.remove('active');
+            }
         });
     </script>
 </body>
