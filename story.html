@@ -189,10 +189,13 @@
             let currentIndex = 0;
 
             function scrollToIndex(index) {
+                console.log('Scrolling to index:', index);
                 gallery.scrollTo({
                     left: index * window.innerWidth,
                     behavior: 'smooth'
                 });
+                // Fallback: set scrollLeft directly
+                gallery.scrollLeft = index * window.innerWidth;
                 currentIndex = index;
                 updateActiveDot();
             }
