@@ -130,6 +130,16 @@
         .empty-section {
             background: #fff;
         }
+        .gallery-title {
+            text-align: center;
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 1rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            margin: 40px 0 10px 0;
+            color: #333;
+            text-transform: uppercase;
+        }
     </style>
 </head>
 <body>
@@ -149,7 +159,21 @@
         </div>
         <div class="nav-indicators" id="navIndicators"></div>
     </section>
-    <section class="story-section empty-section"></section>
+    <section class="story-section empty-section">
+        <h2 class="gallery-title">VISITORS</h2>
+        <button class="arrow left" id="arrowLeft2" aria-label="Previous image">&#8592;</button>
+        <button class="arrow right" id="arrowRight2" aria-label="Next image">&#8594;</button>
+        <div class="horizontal-gallery" id="gallery2">
+            <img src="media/images2/visitors/9.jpg" alt="Visitor Image 9">
+            <img src="media/images2/visitors/10.jpg" alt="Visitor Image 10">
+            <img src="media/images2/visitors/11.jpg" alt="Visitor Image 11">
+            <img src="media/images2/visitors/12.jpg" alt="Visitor Image 12">
+            <img src="media/images2/visitors/13.jpg" alt="Visitor Image 13">
+            <img src="media/images2/visitors/14.jpg" alt="Visitor Image 14">
+            <img src="media/images2/visitors/15.jpg" alt="Visitor Image 15">
+        </div>
+        <div class="nav-indicators" id="navIndicators2"></div>
+    </section>
 
     <script>
         const gallery = document.getElementById('gallery');
@@ -204,6 +228,63 @@
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowLeft') arrowLeft.click();
             if (e.key === 'ArrowRight') arrowRight.click();
+        });
+
+        // JS for second gallery
+        const gallery2 = document.getElementById('gallery2');
+        const navIndicators2 = document.getElementById('navIndicators2');
+        const images2 = gallery2.getElementsByTagName('img');
+        const arrowLeft2 = document.getElementById('arrowLeft2');
+        const arrowRight2 = document.getElementById('arrowRight2');
+        let currentIndex2 = 0;
+
+        for (let i = 0; i < images2.length; i++) {
+            const dot2 = document.createElement('div');
+            dot2.className = 'nav-dot';
+            dot2.addEventListener('click', () => {
+                gallery2.scrollTo({
+                    left: i * window.innerWidth,
+                    behavior: 'smooth'
+                });
+            });
+            navIndicators2.appendChild(dot2);
+        }
+
+        function updateActiveDot2() {
+            const scrollPosition2 = gallery2.scrollLeft;
+            const activeIndex2 = Math.round(scrollPosition2 / window.innerWidth);
+            const dots2 = navIndicators2.getElementsByClassName('nav-dot');
+            for (let i = 0; i < dots2.length; i++) {
+                dots2[i].classList.toggle('active', i === activeIndex2);
+            }
+            currentIndex2 = activeIndex2;
+        }
+        gallery2.addEventListener('scroll', updateActiveDot2);
+        navIndicators2.firstChild.classList.add('active');
+
+        arrowLeft2.addEventListener('click', () => {
+            if (currentIndex2 > 0) {
+                currentIndex2--;
+                gallery2.scrollTo({
+                    left: currentIndex2 * window.innerWidth,
+                    behavior: 'smooth'
+                });
+            }
+        });
+        arrowRight2.addEventListener('click', () => {
+            if (currentIndex2 < images2.length - 1) {
+                currentIndex2++;
+                gallery2.scrollTo({
+                    left: currentIndex2 * window.innerWidth,
+                    behavior: 'smooth'
+                });
+            }
+        });
+        document.addEventListener('keydown', (e) => {
+            if (document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+                if (e.key === 'ArrowLeft') arrowLeft2.click();
+                if (e.key === 'ArrowRight') arrowRight2.click();
+            }
         });
     </script>
 </body>
