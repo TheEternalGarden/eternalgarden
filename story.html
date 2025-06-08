@@ -124,24 +124,33 @@
             background: #fff;
             display: block;
         }
+        .story-section {
+            min-height: 100vh;
+            width: 100vw;
+        }
+        .empty-section {
+            background: #fff;
+        }
     </style>
 </head>
 <body>
     <h1 class="title">THE STORY // PROLOGUE</h1>
-    <button class="arrow left" id="arrowLeft" aria-label="Previous image">&#8592;</button>
-    <button class="arrow right" id="arrowRight" aria-label="Next image">&#8594;</button>
-    <div class="horizontal-gallery" id="gallery">
-        <img src="media/images2/1.jpg" alt="Story Image 1">
-        <img src="media/images2/2.jpg" alt="Story Image 2">
-        <img src="media/images2/3.png" alt="Story Image 3">
-        <img src="media/images2/4.jpg" alt="Story Image 4">
-        <img src="media/images2/5.jpg" alt="Story Image 5">
-        <img src="media/images2/6.jpg" alt="Story Image 6">
-        <img src="media/images2/7.jpg" alt="Story Image 7">
-        <img src="media/images2/8.jpg" alt="Story Image 8">
-        <div class="gallery-page empty"></div>
-    </div>
-    <div class="nav-indicators" id="navIndicators"></div>
+    <section class="story-section">
+        <button class="arrow left" id="arrowLeft" aria-label="Previous image">&#8592;</button>
+        <button class="arrow right" id="arrowRight" aria-label="Next image">&#8594;</button>
+        <div class="horizontal-gallery" id="gallery">
+            <img src="media/images2/1.jpg" alt="Story Image 1">
+            <img src="media/images2/2.jpg" alt="Story Image 2">
+            <img src="media/images2/3.png" alt="Story Image 3">
+            <img src="media/images2/4.jpg" alt="Story Image 4">
+            <img src="media/images2/5.jpg" alt="Story Image 5">
+            <img src="media/images2/6.jpg" alt="Story Image 6">
+            <img src="media/images2/7.jpg" alt="Story Image 7">
+            <img src="media/images2/8.jpg" alt="Story Image 8">
+        </div>
+        <div class="nav-indicators" id="navIndicators"></div>
+    </section>
+    <section class="story-section empty-section"></section>
 
     <script>
         const gallery = document.getElementById('gallery');
