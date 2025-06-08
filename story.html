@@ -176,6 +176,15 @@
     </section>
 
     <script>
+        function isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return (
+                rect.top < window.innerHeight &&
+                rect.bottom > 0
+            );
+        }
+
+        // First gallery
         const gallery = document.getElementById('gallery');
         const navIndicators = document.getElementById('navIndicators');
         const images = gallery.getElementsByTagName('img');
@@ -225,12 +234,8 @@
                 });
             }
         });
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') arrowLeft.click();
-            if (e.key === 'ArrowRight') arrowRight.click();
-        });
 
-        // JS for second gallery
+        // Second gallery
         const gallery2 = document.getElementById('gallery2');
         const navIndicators2 = document.getElementById('navIndicators2');
         const images2 = gallery2.getElementsByTagName('img');
@@ -280,10 +285,17 @@
                 });
             }
         });
+
+        // Arrow key navigation: only for gallery in view
         document.addEventListener('keydown', (e) => {
             if (document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
-                if (e.key === 'ArrowLeft') arrowLeft2.click();
-                if (e.key === 'ArrowRight') arrowRight2.click();
+                if (isElementInViewport(gallery) && isElementInViewport(arrowLeft) && isElementInViewport(arrowRight)) {
+                    if (e.key === 'ArrowLeft') arrowLeft.click();
+                    if (e.key === 'ArrowRight') arrowRight.click();
+                } else if (isElementInViewport(gallery2) && isElementInViewport(arrowLeft2) && isElementInViewport(arrowRight2)) {
+                    if (e.key === 'ArrowLeft') arrowLeft2.click();
+                    if (e.key === 'ArrowRight') arrowRight2.click();
+                }
             }
         });
     </script>
