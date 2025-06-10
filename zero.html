@@ -149,45 +149,63 @@
         <div class="page">
             <div class="title">ETERNAL GARDEN // ZERO IV</div>
             <div class="gallery">
-                <div class="gallery-content" style="width: 100%; overflow-x: auto; display: flex; gap: 20px; padding: 20px 0; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;">
-                    <div style="flex: 0 0 auto; width: 80vw; max-width: 800px; scroll-snap-align: start;">
+                <div class="gallery-content" style="width: 100%; position: relative;">
+                    <div style="width: 100%; max-width: 800px; margin: 0 auto; position: relative;">
                         <video autoplay loop muted playsinline style="width: 100%; height: auto; border-radius: 8px;">
                             <source src="media/videos/tkzero.mp4" type="video/mp4">
                         </video>
-                    </div>
-                    <div style="flex: 0 0 auto; width: 80vw; max-width: 800px; scroll-snap-align: start;">
-                        <video autoplay loop muted playsinline style="width: 100%; height: auto; border-radius: 8px;">
-                            <source src="media/videos/sarazero.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                    <div style="flex: 0 0 auto; width: 80vw; max-width: 800px; scroll-snap-align: start;">
-                        <video autoplay loop muted playsinline style="width: 100%; height: auto; border-radius: 8px;">
-                            <source src="media/videos/refizero.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                    <div style="flex: 0 0 auto; width: 80vw; max-width: 800px; scroll-snap-align: start;">
-                        <video autoplay loop muted playsinline style="width: 100%; height: auto; border-radius: 8px;">
-                            <source src="media/videos/kevinzero.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                    <div style="flex: 0 0 auto; width: 80vw; max-width: 800px; scroll-snap-align: start;">
-                        <video autoplay loop muted playsinline style="width: 100%; height: auto; border-radius: 8px;">
-                            <source src="media/videos/kaizero.mov" type="video/quicktime">
-                        </video>
-                    </div>
-                    <div style="flex: 0 0 auto; width: 80vw; max-width: 800px; scroll-snap-align: start;">
-                        <video autoplay loop muted playsinline style="width: 100%; height: auto; border-radius: 8px;">
-                            <source src="media/videos/domzero.mp4" type="video/mp4">
-                        </video>
+                        <div style="position: absolute; top: 50%; left: 0; right: 0; display: flex; justify-content: space-between; transform: translateY(-50%); padding: 0 20px;">
+                            <button class="nav-arrow" style="background: rgba(0,0,0,0.5); border: none; color: white; font-size: 24px; padding: 10px 20px; cursor: pointer; border-radius: 5px;" onclick="prevVideo()">←</button>
+                            <button class="nav-arrow" style="background: rgba(0,0,0,0.5); border: none; color: white; font-size: 24px; padding: 10px 20px; cursor: pointer; border-radius: 5px;" onclick="nextVideo()">→</button>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="description">Experience the unique artistic vision of each musician as they transform into characters within the Eternal Garden universe. Scroll horizontally to explore their individual journeys.</div>
+            <div class="description">Experience the unique artistic vision of each musician as they transform into characters within the Eternal Garden universe. Use the arrows to navigate through their individual journeys.</div>
         </div>
     </div>
     <div class="nav-arrows">
         <a href="index.html" class="nav-arrow left">←</a>
         <a href="codex.html" class="nav-arrow right">→</a>
     </div>
+
+    <script>
+        const videos = [
+            { src: 'media/videos/tkzero.mp4', type: 'video/mp4' },
+            { src: 'media/videos/sarazero.mp4', type: 'video/mp4' },
+            { src: 'media/videos/refizero.mp4', type: 'video/mp4' },
+            { src: 'media/videos/kevinzero.mp4', type: 'video/mp4' },
+            { src: 'media/videos/kaizero.mov', type: 'video/quicktime' },
+            { src: 'media/videos/domzero.mp4', type: 'video/mp4' }
+        ];
+        let currentVideoIndex = 0;
+        const videoElement = document.querySelector('.gallery-content video');
+
+        function updateVideo(index) {
+            const video = videos[index];
+            videoElement.innerHTML = `<source src="${video.src}" type="${video.type}">`;
+            videoElement.load();
+            videoElement.play();
+        }
+
+        function nextVideo() {
+            currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+            updateVideo(currentVideoIndex);
+        }
+
+        function prevVideo() {
+            currentVideoIndex = (currentVideoIndex - 1 + videos.length) % videos.length;
+            updateVideo(currentVideoIndex);
+        }
+
+        // Handle keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') {
+                prevVideo();
+            } else if (e.key === 'ArrowRight') {
+                nextVideo();
+            }
+        });
+    </script>
 </body>
 </html> 
