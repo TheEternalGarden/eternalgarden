@@ -3,17 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basic Website</title>
+    <title>Eternal Garden</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="video-container">
-        <video autoplay loop playsinline preload="auto" id="introVideo">
-            <source src="media/videos/gardenerintro.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        <button id="volumeToggle" class="volume-toggle" type="button" aria-label="Toggle volume">🔇</button>
-    </div>
     <div class="hamburger-menu">
         <div class="hamburger-icon">
             <span></span>
@@ -22,14 +15,27 @@
         </div>
         <nav class="menu-items">
             <ul>
-                <li><a href="story.html">Story</a></li>
-                <li><a href="soundtrack.html">Soundtrack</a></li>
-                <li><a href="zero.html">Zero</a></li>
-                <li><a href="artists.html">Artists</a></li>
-                <!-- <li><a href="gallery.html">Gallery</a></li> -->
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="story.html">STORY</a></li>
+                <li><a href="soundtrack.html">SOUNDTRACK</a></li>
+                <li><a href="zero.html">ZERO</a></li>
             </ul>
         </nav>
     </div>
+
+    <div class="video-container">
+        <video id="introVideo" autoplay muted loop playsinline>
+            <source src="media/videos/gardenerintro.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div id="videoError" class="video-error" style="display: none;">
+            Video failed to load. Please refresh the page.
+        </div>
+        <button id="volumeToggle" class="volume-toggle" aria-label="Toggle sound">
+            <span class="volume-icon">🔇</span>
+        </button>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html> 
