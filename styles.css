@@ -185,12 +185,18 @@ body {
 .video-section {
     padding: 2rem;
     text-align: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .video-container {
+    width: 100%;
     max-width: 800px;
     margin: 0 auto;
     padding: 1rem;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
 .video-container video {
@@ -198,4 +204,6 @@ body {
     height: auto;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: block;
+    margin: 0 auto;
 } 
