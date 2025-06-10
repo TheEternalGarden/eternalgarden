@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETERNAL GARDEN - Gallery</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        .gallery-container {
+            padding: 20px;
+            margin-top: 60px;
+        }
+
+        .gallery-title {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            z-index: 1000;
+        }
+
+        .description {
+            position: fixed;
+            top: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            max-width: 600px;
+            font-size: 0.8em;
+            opacity: 0.8;
+            line-height: 1.4;
+            z-index: 1000;
+        }
+
+        .horizontal-gallery {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 20px 0;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .gallery-item {
+            flex: 0 0 auto;
+            width: 80vw;
+            max-width: 800px;
+            scroll-snap-align: start;
+            position: relative;
+        }
+
+        video {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+        }
+
+        .nav-arrows {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        .nav-arrow {
+            color: #fff;
+            text-decoration: none;
+            font-size: 24px;
+            padding: 10px 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .nav-arrow:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Hide scrollbar but keep functionality */
+        .horizontal-gallery::-webkit-scrollbar {
+            display: none;
+        }
+        .horizontal-gallery {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="gallery-container">
+        <div class="gallery-title">Gallery</div>
+        <div class="description">Scroll horizontally to explore the artistic visions of each musician in the Eternal Garden universe.</div>
+        <div class="horizontal-gallery">
+            <div class="gallery-item">
+                <video autoplay loop muted playsinline>
+                    <source src="media/videos/tkzero.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="gallery-item">
+                <video autoplay loop muted playsinline>
+                    <source src="media/videos/sarazero.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="gallery-item">
+                <video autoplay loop muted playsinline>
+                    <source src="media/videos/refizero.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="gallery-item">
+                <video autoplay loop muted playsinline>
+                    <source src="media/videos/kevinzero.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="gallery-item">
+                <video autoplay loop muted playsinline>
+                    <source src="media/videos/kaizero.mov" type="video/quicktime">
+                </video>
+            </div>
+            <div class="gallery-item">
+                <video autoplay loop muted playsinline>
+                    <source src="media/videos/domzero.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+        <div class="nav-arrows">
+            <a href="index.html" class="nav-arrow left">←</a>
+            <a href="index.html" class="nav-arrow right">→</a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const gallery = document.querySelector('.horizontal-gallery');
+            const leftArrow = document.querySelector('.nav-arrow.left');
+            const rightArrow = document.querySelector('.nav-arrow.right');
+
+            // Scroll by one item width
+            const scrollAmount = gallery.querySelector('.gallery-item').offsetWidth + 20; // 20px for gap
+
+            leftArrow.addEventListener('click', function(e) {
+                e.preventDefault();
+                gallery.scrollBy({
+                    left: -scrollAmount,
+                    behavior: 'smooth'
+                });
+            });
+
+            rightArrow.addEventListener('click', function(e) {
+                e.preventDefault();
+                gallery.scrollBy({
+                    left: scrollAmount,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Handle keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowLeft') {
+                    gallery.scrollBy({
+                        left: -scrollAmount,
+                        behavior: 'smooth'
+                    });
+                } else if (e.key === 'ArrowRight') {
+                    gallery.scrollBy({
+                        left: scrollAmount,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html> 
