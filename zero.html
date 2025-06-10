@@ -186,12 +186,26 @@
 
         function updateVideo(index) {
             const video = videos[index];
-            videoElement.src = video.src;
-            videoElement.load();
+            // Create a new source element
+            const source = document.createElement('source');
+            source.src = video.src;
+            source.type = video.type;
+            
+            // Clear existing sources and add the new one
+            videoElement.innerHTML = '';
+            videoElement.appendChild(source);
+            
+            // Set mute state and play
             videoElement.muted = isMuted;
-            videoElement.play().catch(function(error) {
-                console.log("Video play failed:", error);
-            });
+            videoElement.load();
+            
+            // Use a promise to handle the play attempt
+            const playPromise = videoElement.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(function(error) {
+                    console.log("Video play failed:", error);
+                });
+            }
         }
 
         function nextVideo() {
