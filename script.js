@@ -1,11 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
     const hamburgerIcon = document.querySelector('.hamburger-icon');
     const menuItems = document.querySelector('.menu-items');
-    const video = document.querySelector('video');
+    const video = document.querySelector('#introVideo');
     const volumeToggle = document.getElementById('volumeToggle');
 
+    console.log('Video element:', video);
+    console.log('Video source:', video.querySelector('source').src);
+
     // Set initial video state
-    video.muted = false;
+    video.muted = true; // Start muted for autoplay
     video.volume = 1;
 
     // Hamburger menu functionality
@@ -42,7 +45,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Ensure video is playing
-    video.play().catch(error => {
-        console.error('Error playing video:', error);
-    });
+    const playVideo = async () => {
+        try {
+            await video.play();
+            console.log('Video started playing');
+        } catch (error) {
+            console.error('Error playing video:', error);
+            // Try playing again after user interaction
+            document.addEventListener('click', () => {
+                video.play().catch(e => console.error('Still cannot play video:', e));
+            }, { once: true });
+        }
+    };
+
+    playVideo();
 });
