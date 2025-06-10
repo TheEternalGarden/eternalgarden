@@ -75,3 +75,6 @@ eternalgarden/
 
 ## Contact
 For technical support or questions, contact [Your Contact Information] 
+## STEP 1: 🏠 Home Page (`pages/index.tsx`)
+
+- [ ] Display `gardenerintro.mp4` as full-width autoplay video (with sound, auto loop)
