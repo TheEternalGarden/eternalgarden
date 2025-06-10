@@ -151,13 +151,14 @@
             <div class="gallery">
                 <div class="gallery-content" style="width: 100%; position: relative;">
                     <div style="width: 100%; max-width: 800px; margin: 0 auto; position: relative;">
-                        <video autoplay loop muted playsinline style="width: 100%; height: auto; border-radius: 8px;">
+                        <video id="artistVideo" autoplay loop playsinline style="width: 100%; height: auto; border-radius: 8px;">
                             <source src="media/videos/tkzero.mp4" type="video/mp4">
                         </video>
                         <div style="position: absolute; top: 50%; left: 0; right: 0; display: flex; justify-content: space-between; transform: translateY(-50%); padding: 0 20px;">
                             <button class="nav-arrow" style="background: rgba(0,0,0,0.5); border: none; color: white; font-size: 24px; padding: 10px 20px; cursor: pointer; border-radius: 5px;" onclick="prevVideo()">←</button>
                             <button class="nav-arrow" style="background: rgba(0,0,0,0.5); border: none; color: white; font-size: 24px; padding: 10px 20px; cursor: pointer; border-radius: 5px;" onclick="nextVideo()">→</button>
                         </div>
+                        <button id="volumeToggle" style="position: absolute; bottom: 20px; right: 20px; background: rgba(0,0,0,0.5); border: none; color: white; font-size: 24px; padding: 10px; cursor: pointer; border-radius: 5px;">🔇</button>
                     </div>
                 </div>
             </div>
@@ -179,13 +180,18 @@
             { src: 'media/videos/domzero.mp4', type: 'video/mp4' }
         ];
         let currentVideoIndex = 0;
-        const videoElement = document.querySelector('.gallery-content video');
+        const videoElement = document.getElementById('artistVideo');
+        const volumeToggle = document.getElementById('volumeToggle');
+        let isMuted = true;
 
         function updateVideo(index) {
             const video = videos[index];
-            videoElement.innerHTML = `<source src="${video.src}" type="${video.type}">`;
+            videoElement.src = video.src;
             videoElement.load();
-            videoElement.play();
+            videoElement.muted = isMuted;
+            videoElement.play().catch(function(error) {
+                console.log("Video play failed:", error);
+            });
         }
 
         function nextVideo() {
@@ -198,6 +204,13 @@
             updateVideo(currentVideoIndex);
         }
 
+        // Volume toggle functionality
+        volumeToggle.addEventListener('click', function() {
+            isMuted = !isMuted;
+            videoElement.muted = isMuted;
+            volumeToggle.textContent = isMuted ? '🔇' : '🔊';
+        });
+
         // Handle keyboard navigation
         document.addEventListener('keydown', function(e) {
             if (e.key === 'ArrowLeft') {
@@ -206,6 +219,9 @@
                 nextVideo();
             }
         });
+
+        // Initialize first video
+        updateVideo(0);
     </script>
 </body>
 </html> 
