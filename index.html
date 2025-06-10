@@ -24,7 +24,7 @@
     </div>
 
     <div class="video-container">
-        <video id="introVideo" autoplay loop playsinline preload="auto" onerror="handleVideoError()">
+        <video id="introVideo" autoplay loop playsinline muted preload="auto">
             <source src="./media/videos/gardenerintro.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
@@ -32,17 +32,10 @@
             Video failed to load. Please refresh the page.
         </div>
         <button id="volumeToggle" class="volume-toggle" aria-label="Toggle sound">
-            <span class="volume-icon">🔊</span>
+            <span class="volume-icon">🔇</span>
         </button>
     </div>
 
-    <script>
-        function handleVideoError() {
-            const errorDiv = document.getElementById('videoError');
-            errorDiv.style.display = 'block';
-            console.error('Video failed to load');
-        }
-    </script>
     <script src="script.js"></script>
 </body>
 </html> 
