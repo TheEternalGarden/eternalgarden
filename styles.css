@@ -103,8 +103,8 @@ body {
     color: #666;
 }
 
-/* Video Styles */
-.video-container {
+/* Homepage Video Styles */
+.homepage-video-container {
     position: fixed;
     top: 0;
     left: 0;
@@ -114,7 +114,7 @@ body {
     z-index: -1;
 }
 
-.video-container video {
+.homepage-video-container video {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -122,6 +122,33 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+/* Soundtrack Page Video Styles */
+.video-section {
+    padding: 2rem;
+    text-align: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.video-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.video-container video {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: block;
+    margin: 0 auto;
 }
 
 /* Ensure menu stays above video */
@@ -180,30 +207,4 @@ body {
 
 .volume-toggle.muted {
     background: rgba(255, 255, 255, 0.4);
-}
-
-.video-section {
-    padding: 2rem;
-    text-align: center;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.video-container {
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 1rem;
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-}
-
-.video-container video {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    display: block;
-    margin: 0 auto;
 } 
