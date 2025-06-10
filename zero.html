@@ -146,96 +146,10 @@
             </div>
             <div class="description">The ZERO music album features six tracks from six independent artists in collaboration with Garden X and serves as the soundtrack to the Codex. In addition to their own tracks on the album, each featured artist will embark on a transformative journey to become a main character in the expansive storyline of Eternal Garden. This is the first RPG that musicians play using their creativity.</div>
         </div>
-        <div class="page">
-            <div class="title">ETERNAL GARDEN // ZERO IV</div>
-            <div class="gallery">
-                <div class="gallery-content" style="width: 100%; position: relative;">
-                    <div style="width: 100%; max-width: 800px; margin: 0 auto; position: relative;">
-                        <video id="artistVideo" autoplay loop playsinline style="width: 100%; height: auto; border-radius: 8px;">
-                            <source src="media/videos/tkzero.mp4" type="video/mp4">
-                        </video>
-                        <div style="position: absolute; top: 50%; left: 0; right: 0; display: flex; justify-content: space-between; transform: translateY(-50%); padding: 0 20px;">
-                            <button class="nav-arrow" style="background: rgba(0,0,0,0.5); border: none; color: white; font-size: 24px; padding: 10px 20px; cursor: pointer; border-radius: 5px;" onclick="prevVideo()">←</button>
-                            <button class="nav-arrow" style="background: rgba(0,0,0,0.5); border: none; color: white; font-size: 24px; padding: 10px 20px; cursor: pointer; border-radius: 5px;" onclick="nextVideo()">→</button>
-                        </div>
-                        <button id="volumeToggle" style="position: absolute; bottom: 20px; right: 20px; background: rgba(0,0,0,0.5); border: none; color: white; font-size: 24px; padding: 10px; cursor: pointer; border-radius: 5px;">🔇</button>
-                    </div>
-                </div>
-            </div>
-            <div class="description">Experience the unique artistic vision of each musician as they transform into characters within the Eternal Garden universe. Use the arrows to navigate through their individual journeys.</div>
-        </div>
     </div>
     <div class="nav-arrows">
         <a href="index.html" class="nav-arrow left">←</a>
         <a href="codex.html" class="nav-arrow right">→</a>
     </div>
-
-    <script>
-        const videos = [
-            { src: 'media/videos/tkzero.mp4', type: 'video/mp4' },
-            { src: 'media/videos/sarazero.mp4', type: 'video/mp4' },
-            { src: 'media/videos/refizero.mp4', type: 'video/mp4' },
-            { src: 'media/videos/kevinzero.mp4', type: 'video/mp4' },
-            { src: 'media/videos/kaizero.mov', type: 'video/quicktime' },
-            { src: 'media/videos/domzero.mp4', type: 'video/mp4' }
-        ];
-        let currentVideoIndex = 0;
-        const videoElement = document.getElementById('artistVideo');
-        const volumeToggle = document.getElementById('volumeToggle');
-        let isMuted = true;
-
-        function updateVideo(index) {
-            const video = videos[index];
-            // Create a new source element
-            const source = document.createElement('source');
-            source.src = video.src;
-            source.type = video.type;
-            
-            // Clear existing sources and add the new one
-            videoElement.innerHTML = '';
-            videoElement.appendChild(source);
-            
-            // Set mute state and play
-            videoElement.muted = isMuted;
-            videoElement.load();
-            
-            // Use a promise to handle the play attempt
-            const playPromise = videoElement.play();
-            if (playPromise !== undefined) {
-                playPromise.catch(function(error) {
-                    console.log("Video play failed:", error);
-                });
-            }
-        }
-
-        function nextVideo() {
-            currentVideoIndex = (currentVideoIndex + 1) % videos.length;
-            updateVideo(currentVideoIndex);
-        }
-
-        function prevVideo() {
-            currentVideoIndex = (currentVideoIndex - 1 + videos.length) % videos.length;
-            updateVideo(currentVideoIndex);
-        }
-
-        // Volume toggle functionality
-        volumeToggle.addEventListener('click', function() {
-            isMuted = !isMuted;
-            videoElement.muted = isMuted;
-            volumeToggle.textContent = isMuted ? '🔇' : '🔊';
-        });
-
-        // Handle keyboard navigation
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'ArrowLeft') {
-                prevVideo();
-            } else if (e.key === 'ArrowRight') {
-                nextVideo();
-            }
-        });
-
-        // Initialize first video
-        updateVideo(0);
-    </script>
 </body>
 </html> 
