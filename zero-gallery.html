@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETERNAL GARDEN // ZERO GALLERY</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #fff;
+            font-family: 'Courier New', monospace;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .page.active {
+            opacity: 1;
+        }
+
+        .title {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.2em;
+            text-align: center;
+            z-index: 100;
+        }
+
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 60px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .gallery-item {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .gallery-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-item .artist-name {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 5px 10px;
+            font-size: 0.9em;
+        }
+
+        .nav-arrows {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 100;
+        }
+
+        .nav-arrow {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2em;
+            padding: 10px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .nav-arrow:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .gallery-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page active">
+        <div class="title">ETERNAL GARDEN // ZERO GALLERY</div>
+        <div class="gallery-container">
+            <div class="gallery-item">
+                <video src="media/videos/tkzero.mp4" loop muted></video>
+                <div class="artist-name">TK</div>
+            </div>
+            <div class="gallery-item">
+                <video src="media/videos/sarazero.mp4" loop muted></video>
+                <div class="artist-name">SARA</div>
+            </div>
+            <div class="gallery-item">
+                <video src="media/videos/refizero.mp4" loop muted></video>
+                <div class="artist-name">REFI</div>
+            </div>
+            <div class="gallery-item">
+                <video src="media/videos/kevinzero.mp4" loop muted></video>
+                <div class="artist-name">KEVIN</div>
+            </div>
+            <div class="gallery-item">
+                <video src="media/videos/kaizero.mov" loop muted></video>
+                <div class="artist-name">KAI</div>
+            </div>
+            <div class="gallery-item">
+                <video src="media/videos/domzero.mp4" loop muted></video>
+                <div class="artist-name">DOM</div>
+            </div>
+        </div>
+        <div class="nav-arrows">
+            <a href="zero.html" class="nav-arrow">← BACK</a>
+        </div>
+    </div>
+
+    <script>
+        // Play videos when they come into view
+        const videos = document.querySelectorAll('video');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.play();
+                } else {
+                    entry.target.pause();
+                }
+            });
+        }, { threshold: 0.5 });
+
+        videos.forEach(video => {
+            observer.observe(video);
+        });
+    </script>
+</body>
+</html> 
