@@ -106,6 +106,22 @@
         .nav-arrow:hover {
             opacity: 1;
         }
+
+        .gallery-arrow {
+            background: rgba(0,0,0,0.5);
+            border: none;
+            color: #fff;
+            font-size: 2em;
+            padding: 10px 20px;
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+
+        .gallery-arrow.left { left: 0; }
+        .gallery-arrow.right { right: 0; }
     </style>
 </head>
 <body>
@@ -146,9 +162,33 @@
             </div>
             <div class="description">The ZERO music album features six tracks from six independent artists in collaboration with Garden X and serves as the soundtrack to the Codex. In addition to their own tracks on the album, each featured artist will embark on a transformative journey to become a main character in the expansive storyline of Eternal Garden. This is the first RPG that musicians play using their creativity.</div>
         </div>
+        <div class="page">
+            <div class="title">ETERNAL GARDEN // ZERO IV</div>
+            <div class="gallery" style="position: relative;">
+                <button class="gallery-arrow left" onclick="moveGallery(-1)">&#8592;</button>
+                <div class="gallery-content" id="zero4-gallery-content" style="width: 100%; max-width: 900px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                    <video class="zero4-video" src="media/videos/sarazero.mp4" loop muted controls style="display: block;"></video>
+                    <video class="zero4-video" src="media/videos/refizero.mp4" loop muted controls style="display: none;"></video>
+                    <video class="zero4-video" src="media/videos/kevinzero.mp4" loop muted controls style="display: none;"></video>
+                    <video class="zero4-video" src="media/videos/kaizero.mov" loop muted controls style="display: none;"></video>
+                    <video class="zero4-video" src="media/videos/domzero.mp4" loop muted controls style="display: none;"></video>
+                </div>
+                <button class="gallery-arrow right" onclick="moveGallery(1)">&#8594;</button>
+            </div>
+            <div class="description">Featured artist videos from the ZERO album. Use the arrows to navigate.</div>
+        </div>
     </div>
     <div class="nav-arrows">
         <!-- Navigation arrows removed as requested -->
     </div>
+    <script>
+    let zero4Index = 0;
+    function moveGallery(dir) {
+        const videos = document.querySelectorAll('.zero4-video');
+        videos[zero4Index].style.display = 'none';
+        zero4Index = (zero4Index + dir + videos.length) % videos.length;
+        videos[zero4Index].style.display = 'block';
+    }
+    </script>
 </body>
 </html> 
