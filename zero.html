@@ -14,7 +14,7 @@
             overflow-x: hidden;
         }
 
-        .gallery-container {
+        .page {
             width: 100vw;
             height: 100vh;
             display: flex;
@@ -23,6 +23,7 @@
             justify-content: center;
             padding: 20px;
             box-sizing: border-box;
+            scroll-snap-align: start;
         }
 
         .gallery {
@@ -47,40 +48,6 @@
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
-        }
-
-        .nav-arrows {
-            position: fixed;
-            top: 50%;
-            left: 0;
-            right: 0;
-            display: flex;
-            justify-content: space-between;
-            padding: 0 20px;
-            transform: translateY(-50%);
-            z-index: 100;
-        }
-
-        .nav-arrow {
-            color: #fff;
-            text-decoration: none;
-            font-size: 2em;
-            padding: 10px;
-            opacity: 0.7;
-            transition: opacity 0.3s;
-        }
-
-        .nav-arrow:hover {
-            opacity: 1;
-        }
-
-        .gallery-title {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 1.5em;
-            z-index: 100;
         }
 
         .description {
@@ -108,24 +75,69 @@
             padding: 0 20px;
             box-sizing: border-box;
         }
+
+        .scroll-container {
+            height: 100vh;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+        }
+
+        .nav-arrows {
+            position: fixed;
+            top: 50%;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            transform: translateY(-50%);
+            z-index: 100;
+        }
+
+        .nav-arrow {
+            color: #fff;
+            text-decoration: none;
+            font-size: 2em;
+            padding: 10px;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .nav-arrow:hover {
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
-    <div class="gallery-container">
-        <div class="title">ETERNAL GARDEN // ZERO</div>
-        <div class="gallery">
-            <div class="gallery-content">
-                <video autoplay loop muted playsinline>
-                    <source src="media/videos/zerocapsule.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
+    <div class="scroll-container">
+        <div class="page">
+            <div class="title">ETERNAL GARDEN // ZERO</div>
+            <div class="gallery">
+                <div class="gallery-content">
+                    <video autoplay loop muted playsinline>
+                        <source src="media/videos/zerocapsule.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
             </div>
+            <div class="description">ZERO serves as an exploration into how artists can blur the lines between mediums to create an immersive and impactful storytelling experience. Weaving the mediums of music, narration, imagery and animation together, while combining production tools with artificial intelligence, ZERO is a dynamic and evolving stage setting journey for all who choose to enter the world of Eternal Garden.</div>
         </div>
-        <div class="description">ZERO serves as an exploration into how artists can blur the lines between mediums to create an immersive and impactful storytelling experience. Weaving the mediums of music, narration, imagery and animation together, while combining production tools with artificial intelligence, ZERO is a dynamic and evolving stage setting journey for all who choose to enter the world of Eternal Garden.</div>
-        <div class="nav-arrows">
-            <a href="index.html" class="nav-arrow left">←</a>
-            <a href="zero2.html" class="nav-arrow right">→</a>
+        <div class="page">
+            <div class="title">ETERNAL GARDEN // ZERO II</div>
+            <div class="gallery">
+                <div class="gallery-content">
+                    <video autoplay loop muted playsinline>
+                        <source src="media/videos/codex.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+            <div class="description">ZERO II continues the exploration of artistic boundaries, delving deeper into the fusion of mediums and technologies. Through the seamless integration of music, visual storytelling, and artificial intelligence, this piece further expands the narrative landscape of the Eternal Garden, inviting viewers to experience a new dimension of immersive storytelling.</div>
         </div>
+    </div>
+    <div class="nav-arrows">
+        <a href="index.html" class="nav-arrow left">←</a>
+        <a href="codex.html" class="nav-arrow right">→</a>
     </div>
 </body>
 </html> 
