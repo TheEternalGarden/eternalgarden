@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Set initial video state
     video.muted = false;
     video.volume = 1;
+    volumeToggle.textContent = '🔊';
+    volumeToggle.classList.remove('muted');
 
     // Hamburger menu functionality
     hamburgerIcon.addEventListener('click', () => {
@@ -35,6 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Unmuted video');
         } else {
             video.muted = true;
+            video.volume = 0;
             volumeToggle.textContent = '🔇';
             volumeToggle.classList.add('muted');
             console.log('Muted video');
@@ -42,7 +45,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Ensure video is playing
-    video.play().catch(error => {
-        console.error('Error playing video:', error);
-    });
+    const playVideo = async () => {
+        try {
+            await video.play();
+            console.log('Video started playing');
+        } catch (error) {
+            console.error('Error playing video:', error);
+            // If autoplay fails, show a play button
+            const playButton = document.createElement('button');
+            playButton.className = 'play-button';
+            playButton.textContent = 'Play Video';
+            playButton.onclick = async () => {
+                try {
+                    await video.play();
+                    playButton.remove();
+                } catch (err) {
+                    console.error('Error playing video after click:', err);
+                }
+            };
+            document.body.appendChild(playButton);
+        }
+    };
+
+    playVideo();
 });
