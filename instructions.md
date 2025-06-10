@@ -78,3 +78,8 @@ For technical support or questions, contact [Your Contact Information]
 ## STEP 1: 🏠 Home Page (`pages/index.tsx`)
 
 - [ ] Display `gardenerintro.mp4` as full-width autoplay video (with sound, auto loop)
+## STEP 2: 🏠 Zero Page (`pages/zero.tsx`)
+Display zerocapsule.mp4, autoplay and autoloop on page one of the Zero page
+## STEP 3: 🏠 Zero Page (`pages/zero.tsx`)
+Display codex.mp4 on autoplay and autoloop on page two of the Zero page
+
