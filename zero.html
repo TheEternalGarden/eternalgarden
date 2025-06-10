@@ -28,7 +28,7 @@
         .gallery {
             width: 100%;
             max-width: 1200px;
-            height: 80vh;
+            height: 70vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -84,17 +84,14 @@
         }
 
         .description {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
+            position: relative;
             font-size: 0.8em;
             max-width: 800px;
             width: 90%;
             text-align: center;
             line-height: 1.4;
             opacity: 0.8;
-            z-index: 100;
+            margin: 20px auto;
             padding: 0 20px;
             box-sizing: border-box;
         }
@@ -102,7 +99,6 @@
 </head>
 <body>
     <div class="gallery-container">
-        <div class="description">ZERO serves as an exploration into how artists can blur the lines between mediums to create an immersive and impactful storytelling experience. Weaving the mediums of music, narration, imagery and animation together, while combining production tools with artificial intelligence, ZERO is a dynamic and evolving stage setting journey for all who choose to enter the world of Eternal Garden.</div>
         <div class="gallery">
             <div class="gallery-content">
                 <video autoplay loop muted playsinline>
@@ -111,6 +107,7 @@
                 </video>
             </div>
         </div>
+        <div class="description">ZERO serves as an exploration into how artists can blur the lines between mediums to create an immersive and impactful storytelling experience. Weaving the mediums of music, narration, imagery and animation together, while combining production tools with artificial intelligence, ZERO is a dynamic and evolving stage setting journey for all who choose to enter the world of Eternal Garden.</div>
         <div class="nav-arrows">
             <a href="index.html" class="nav-arrow left">←</a>
             <a href="index.html" class="nav-arrow right">→</a>
