@@ -127,6 +127,25 @@
 
         .gallery-arrow.left { left: 0; }
         .gallery-arrow.right { right: 0; }
+
+        .horizontal-gallery-container {
+            width: 100vw;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .horizontal-gallery {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            width: 80vw;
+            max-width: 900px;
+            gap: 40px;
+            align-items: center;
+        }
     </style>
 </head>
 <body>
@@ -172,7 +191,13 @@
             <div class="description" style="margin-top: 40px;">GDNR 1 is a symbolic element of the ZERO experience and story. Serving as a conceptual representation of The Gardener's secrets and power, this shoe is a pioneer to the inevitable future of fashion and storytelling</div>
         </div>
         <div class="page">
-            <div class="description">Featured artist videos from the ZERO album. Use the arrows to navigate.</div>
+            <div class="horizontal-gallery-container" style="width: 100vw; overflow: hidden; position: relative; display: flex; flex-direction: column; align-items: center;">
+                <button class="gallery-arrow left" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); z-index: 10;">&#8592;</button>
+                <div class="horizontal-gallery" style="display: flex; overflow-x: auto; scroll-snap-type: x mandatory; width: 80vw; max-width: 900px; gap: 40px; align-items: center;">
+                    <video src="/media/videos/sarazero1.mp4" controls style="width: 80vw; max-width: 900px; height: 60vh; object-fit: contain; border-radius: 8px; background: #111; scroll-snap-align: center;"></video>
+                </div>
+                <button class="gallery-arrow right" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); z-index: 10;">&#8594;</button>
+            </div>
         </div>
     </div>
     <div class="nav-arrows">
@@ -187,6 +212,23 @@
         zero4Index = (zero4Index + dir + videos.length) % videos.length;
         videos[zero4Index].style.display = 'block';
     }
+
+    // Horizontal gallery navigation for page 5
+    document.addEventListener('DOMContentLoaded', function() {
+        const gallery = document.querySelector('.horizontal-gallery');
+        const leftArrow = document.querySelector('.gallery-arrow.left');
+        const rightArrow = document.querySelector('.gallery-arrow.right');
+        if (gallery && leftArrow && rightArrow) {
+            leftArrow.addEventListener('click', function(e) {
+                e.preventDefault();
+                gallery.scrollBy({ left: -gallery.offsetWidth, behavior: 'smooth' });
+            });
+            rightArrow.addEventListener('click', function(e) {
+                e.preventDefault();
+                gallery.scrollBy({ left: gallery.offsetWidth, behavior: 'smooth' });
+            });
+        }
+    });
     </script>
 </body>
 <script src="script.js"></script>
