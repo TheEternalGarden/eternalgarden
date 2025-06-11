@@ -170,11 +170,12 @@
     let zero4Index = 0;
     function moveGallery(dir) {
         const videos = document.querySelectorAll('.zero4-video');
+        if (videos.length === 0) return;
         videos[zero4Index].style.display = 'none';
         zero4Index = (zero4Index + dir + videos.length) % videos.length;
         videos[zero4Index].style.display = 'block';
     }
     </script>
-    <script src="script.js"></script>
 </body>
+<script src="script.js"></script>
 </html> 
