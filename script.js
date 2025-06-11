@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Hamburger menu functionality
     hamburgerIcon.addEventListener('click', () => {
+        console.log('Hamburger icon clicked');
         menuItems.classList.toggle('active');
         hamburgerIcon.classList.toggle('active');
     });
