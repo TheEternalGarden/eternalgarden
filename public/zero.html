@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZERO - The Eternal Garden</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        .page {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+            scroll-snap-align: start;
+        }
+
+        .gallery {
+            width: 100%;
+            max-width: 1200px;
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .gallery-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        video {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .description {
+            position: relative;
+            font-size: 0.8em;
+            max-width: 800px;
+            width: 90%;
+            text-align: center;
+            line-height: 1.4;
+            opacity: 0.8;
+            margin: 20px auto;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        .title {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: auto;
+            font-size: 1em;
+            text-align: center;
+            line-height: 1.4;
+            opacity: 0.9;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            letter-spacing: 2px;
+            z-index: 2000;
+        }
+
+        .scroll-container {
+            height: 100vh;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+        }
+
+        .nav-arrows {
+            position: fixed;
+            top: 50%;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            transform: translateY(-50%);
+            z-index: 100;
+        }
+
+        .nav-arrow {
+            color: #fff;
+            text-decoration: none;
+            font-size: 2em;
+            padding: 10px;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .nav-arrow:hover {
+            opacity: 1;
+        }
+
+        .gallery-arrow {
+            background: rgba(0,0,0,0.5);
+            border: none;
+            color: #fff;
+            font-size: 2em;
+            padding: 10px 20px;
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+
+        .gallery-arrow.left { left: 0; }
+        .gallery-arrow.right { right: 0; }
+    </style>
+</head>
+<body>
+    <div class="hamburger-menu">
+        <div class="hamburger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav class="menu-items">
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="story.html">STORY</a></li>
+                <li><a href="soundtrack.html">SOUNDTRACK</a></li>
+                <li><a href="zero.html">ZERO</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="scroll-container">
+        <div class="page">
+            <div class="title">ETERNAL GARDEN // ZERO</div>
+            <div class="gallery" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 60vh;">
+                <video src="/media/videos/zerocapsule1.mp4" autoplay loop muted playsinline style="max-width: 100%; max-height: 100%; display: block;"></video>
+            </div>
+            <div class="description">ZERO serves as an exploration into how artists can blur the lines between mediums to create an immersive and impactful storytelling experience. Weaving the mediums of music, narration, imagery and animation together, while combining production tools with artificial intelligence, ZERO is a dynamic and evolving stage setting journey for all who choose to enter the world of Eternal Garden.</div>
+        </div>
+        <div class="page">
+            <div class="description">The CODEX is your key to the Eternal Garden universe. While the CODEX carries many answers to the story of Eternal Garden, it leaves us with even more questions. The book has been engineered to bring the secrets of the garden to life with audio and video experiences. In addition to fantastical visuals, the book also has an AR component; scan each page and experience animation, narrations, and original music.</div>
+        </div>
+        <div class="page">
+            <div class="description">The ZERO music album features six tracks from six independent artists in collaboration with Garden X and serves as the soundtrack to the Codex. In addition to their own tracks on the album, each featured artist will embark on a transformative journey to become a main character in the expansive storyline of Eternal Garden. This is the first RPG that musicians play using their creativity.</div>
+        </div>
+        <div class="page">
+            <div class="description">Featured artist videos from the ZERO album. Use the arrows to navigate.</div>
+        </div>
+    </div>
+    <div class="nav-arrows">
+        <!-- Navigation arrows removed as requested -->
+    </div>
+    <script>
+    let zero4Index = 0;
+    function moveGallery(dir) {
+        const videos = document.querySelectorAll('.zero4-video');
+        videos[zero4Index].style.display = 'none';
+        zero4Index = (zero4Index + dir + videos.length) % videos.length;
+        videos[zero4Index].style.display = 'block';
+    }
+    </script>
+    <script src="script.js"></script>
+</body>
+</html> 

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETERNAL GARDEN // ZERO GALLERY</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+        }
+        .scroll-container {
+            width: 100vw;
+            height: 100vh;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+        }
+        .page {
+            width: 100vw;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px 20px 20px;
+            box-sizing: border-box;
+            scroll-snap-align: start;
+        }
+        .title {
+            font-size: 1.2em;
+            text-align: center;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+        .gallery-content {
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        video {
+            width: 100%;
+            max-width: 900px;
+            aspect-ratio: 16/9;
+            background: #111;
+            border: 1px solid rgba(255,255,255,0.2);
+            margin-bottom: 10px;
+        }
+        .artist-name {
+            font-size: 1em;
+            margin-bottom: 30px;
+            opacity: 0.7;
+            letter-spacing: 2px;
+        }
+        .nav-arrows {
+            position: fixed;
+            top: 50%;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            transform: translateY(-50%);
+            z-index: 100;
+        }
+        .nav-arrow {
+            color: #fff;
+            text-decoration: none;
+            font-size: 2em;
+            padding: 10px;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        .nav-arrow:hover {
+            opacity: 1;
+        }
+        @media (max-width: 900px) {
+            video {
+                max-width: 100vw;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hamburger-menu">
+        <div class="hamburger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav class="menu-items">
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="story.html">STORY</a></li>
+                <li><a href="soundtrack.html">SOUNDTRACK</a></li>
+                <li><a href="zero.html">ZERO</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="scroll-container">
+        <div class="page">
+            <div class="title">ETERNAL GARDEN // ZERO GALLERY</div>
+            <div class="gallery-content">
+                <video src="media/videos/tkzero.mp4" loop muted controls></video>
+                <div class="artist-name">TK</div>
+            </div>
+        </div>
+        <div class="page">
+            <div class="gallery-content">
+                <video src="media/videos/sarazero.mp4" loop muted controls></video>
+                <div class="artist-name">SARA</div>
+            </div>
+        </div>
+        <div class="page">
+            <div class="gallery-content">
+                <video src="media/videos/refizero.mp4" loop muted controls></video>
+                <div class="artist-name">REFI</div>
+            </div>
+        </div>
+        <div class="page">
+            <div class="gallery-content">
+                <video src="media/videos/kevinzero.mp4" loop muted controls></video>
+                <div class="artist-name">KEVIN</div>
+            </div>
+        </div>
+        <div class="page">
+            <div class="gallery-content">
+                <video src="media/videos/kaizero.mov" loop muted controls></video>
+                <div class="artist-name">KAI</div>
+            </div>
+        </div>
+        <div class="page">
+            <div class="gallery-content">
+                <video src="media/videos/domzero.mp4" loop muted controls></video>
+                <div class="artist-name">DOM</div>
+            </div>
+        </div>
+    </div>
+    <div class="nav-arrows">
+        <a href="zero.html" class="nav-arrow">← BACK</a>
+        <a href="codex.html" class="nav-arrow">NEXT →</a>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 
