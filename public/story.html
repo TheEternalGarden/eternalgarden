@@ -190,7 +190,7 @@
         <div class="nav-indicators" id="navIndicators3"></div>
 
         <!-- Gallery 4 -->
-        <div class="gallery-title">ETERNAL GARDEN</div>
+        <div class="gallery-title typewriter" id="typewriter-title" style="font-family: 'Helios', Arial, sans-serif; text-transform: uppercase;">ETERNAL GARDEN</div>
         <button class="arrow left" data-gallery="gallery4" aria-label="Previous image">&#8592;</button>
         <button class="arrow right" data-gallery="gallery4" aria-label="Next image">&#8594;</button>
         <div class="horizontal-gallery" id="gallery4">
@@ -314,6 +314,22 @@
                 if (e.key === 'ArrowLeft') arrowLeft.click();
                 if (e.key === 'ArrowRight') arrowRight.click();
             }
+        });
+
+        // Typewriter effect for the top gallery title
+        window.addEventListener('DOMContentLoaded', function() {
+            const el = document.getElementById('typewriter-title');
+            const text = el.textContent;
+            el.textContent = '';
+            let i = 0;
+            function type() {
+                if (i < text.length) {
+                    el.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, 70);
+                }
+            }
+            type();
         });
     </script>
     <script src="script.js"></script>
