@@ -40,4 +40,46 @@ html, body {
 .menu-items, .hamburger-icon {
     z-index: 2002;
     pointer-events: auto;
+}
+
+/* Hamburger Menu Overlay */
+.menu-items {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.95);
+    transition: 0.5s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.menu-items.active {
+    right: 0;
+}
+.menu-items ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+.menu-items ul li {
+    margin: 20px 0;
+}
+.menu-items ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 2em;
+    font-weight: 300;
+    letter-spacing: 2px;
+    transition: 0.3s ease;
+    display: inline-block;
+    padding: 10px 20px;
+}
+.menu-items ul li a:hover {
+    color: #888;
+    transform: scale(1.1);
 } 
