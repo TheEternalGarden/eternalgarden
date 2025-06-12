@@ -56,12 +56,43 @@
         </nav>
     </div>
     <div class="about-container">
-        <div class="about-title">ETERNAL GARDEN</div>
-        <div class="about-text" style="font-size: 0.9rem;">
-            Eternal Garden is a sci-fi fantasy epic about a mystical seed with the power to spawn infinite worlds.
-        </div>
-        <div style="font-size: 0.8rem; margin-top: 10px;">Founded in 2022</div>
+        <div class="about-title" id="aboutTitle"></div>
+        <div class="about-text" id="aboutText" style="font-size: 0.9rem;"></div>
+        <div id="aboutFounded" style="font-size: 0.8rem; margin-top: 10px;"></div>
     </div>
     <script src="script.js"></script>
+    <script>
+    // Typewriter effect for multiple elements in sequence
+    function typeWriter(element, text, speed, callback) {
+        let i = 0;
+        function typing() {
+            if (i < text.length) {
+                element.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typing, speed);
+            } else if (callback) {
+                callback();
+            }
+        }
+        typing();
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+        const title = document.getElementById('aboutTitle');
+        const about = document.getElementById('aboutText');
+        const founded = document.getElementById('aboutFounded');
+        title.innerHTML = '';
+        about.innerHTML = '';
+        founded.innerHTML = '';
+        typeWriter(title, 'ETERNAL GARDEN', 60, function() {
+            setTimeout(function() {
+                typeWriter(about, 'Eternal Garden is a sci-fi fantasy epic about a mystical seed with the power to spawn infinite worlds.', 24, function() {
+                    setTimeout(function() {
+                        typeWriter(founded, 'Founded in 2022', 32);
+                    }, 300);
+                });
+            }, 400);
+        });
+    });
+    </script>
 </body>
 </html> 
