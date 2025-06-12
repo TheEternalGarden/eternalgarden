@@ -247,9 +247,11 @@
         <!-- Navigation arrows removed as requested -->
     </div>
     <div id="finalOverlay" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:#000; z-index:9999; opacity:0; transition: opacity 1s; pointer-events:none;">
-        <a href="story.html" id="readStory" style="position:absolute; left:5vw; top:50%; transform:translateY(-50%); color:#fff; font-size:2em; font-family:'Courier New',monospace; text-decoration:none; opacity:0.85; letter-spacing:2px; animation:hoverFloat 3.5s ease-in-out infinite; text-shadow: 0 4px 12px rgba(0,0,0,0.7);">STORY</a>
-        <a href="soundtrack.html" id="listenSoundtrack" style="position:absolute; right:5vw; top:50%; transform:translateY(-50%); color:#fff; font-size:2em; font-family:'Courier New',monospace; text-decoration:none; opacity:0.85; letter-spacing:2px; animation:hoverFloat 3.5s ease-in-out infinite; text-shadow: 0 4px 12px rgba(0,0,0,0.7);">SOUNDTRACK</a>
-        <img src="/media/images/eternalman.png" alt="Eternal Man" style="position:absolute; left:50%; bottom:5vh; transform:translateX(-50%); max-width:420px; width:60vw; height:auto; opacity:0.92; box-shadow:0 8px 32px rgba(0,0,0,0.7); border-radius:12px;" />
+        <img src="/media/images/eternalman.png" alt="Eternal Man" style="position:absolute; left:0; top:0; width:100vw; height:100vh; object-fit:cover; opacity:0.7; z-index:1;" />
+        <div style="position:absolute; right:5vw; top:50%; transform:translateY(-50%); display:flex; flex-direction:column; align-items:flex-end; z-index:2;">
+            <a href="story.html" id="readStory" style="color:#fff; font-size:2.2em; font-family:'Courier New',monospace; text-decoration:none; opacity:0.92; letter-spacing:2px; animation:hoverFloat 3.5s ease-in-out infinite; text-shadow: 0 4px 12px rgba(0,0,0,0.7); margin-bottom:0.2em;">STORY</a>
+            <a href="soundtrack.html" id="listenSoundtrack" style="color:#fff; font-size:2em; font-family:'Courier New',monospace; text-decoration:none; opacity:0.85; letter-spacing:2px; animation:hoverFloat 3.5s ease-in-out infinite; text-shadow: 0 4px 12px rgba(0,0,0,0.7);">SOUNDTRACK</a>
+        </div>
     </div>
     <script>
     let zero4Index = 0;
