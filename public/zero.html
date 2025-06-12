@@ -202,14 +202,14 @@
     </div>
     <div class="scroll-container">
         <div class="page">
-            <div class="title" id="zeroTitle">ETERNAL GARDEN // ZERO</div>
-            <div class="gallery" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 60vh; position: relative;">
-                <video id="zeroVideo1" class="hovering-video fade-in" src="/media/videos/zerocapsule1.mp4" autoplay muted playsinline preload="auto" style="max-width: 100%; max-height: 100%; display: block;"></video>
-                <video id="zeroVideo2" class="hovering-video fade-out" src="/media/videos/codex.mp4" autoplay muted playsinline preload="auto" style="max-width: 100%; max-height: 100%; display: none;"></video>
-                <video id="albumVideo1" class="hovering-video fade-out" src="/media/videos/album.mp4" autoplay muted playsinline preload="auto" style="max-width: 100%; max-height: 100%; display: none;"></video>
-                <video id="gardenerVideo1" class="hovering-video fade-out" src="/media/videos/gardenershoe.mp4" autoplay muted playsinline preload="auto" style="max-width: 100%; max-height: 100%; display: none;"></video>
+            <div class="video-container" style="position: relative; width: 100%; height: 100vh; overflow: hidden;">
+                <video id="zerocapsule1" autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; transition: opacity 1s ease-in-out;"></video>
+                <video id="codex" autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 100%; opacity: 0.5; transition: left 1s ease-in-out, opacity 1s ease-in-out;"></video>
             </div>
-            <div class="description" id="zeroDesc" style="font-family: Arial, Helvetica, sans-serif; margin-top: 70px;">ZERO serves as an exploration into how artists can blur the lines between mediums to create an immersive and impactful storytelling experience. Weaving the mediums of music, narration, imagery and animation together, while combining production tools with artificial intelligence, ZERO is a dynamic and evolving stage setting journey for all who choose to enter the world of Eternal Garden.</div>
+            <div class="content" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: white; z-index: 2;">
+                <h1 id="zeroTitle" class="typewriter" style="font-family: 'Courier New', monospace; font-size: 2em; margin-bottom: 20px;">ETERNAL GARDEN // ZERO</h1>
+                <div class="description" id="zeroDesc" style="font-family: Arial, Helvetica, sans-serif; margin-top: 70px;">ZERO serves as an exploration into how artists can blur the lines between mediums to create an immersive and impactful storytelling experience. Weaving the mediums of music, narration, imagery and animation together, while combining production tools with artificial intelligence, ZERO is a dynamic and evolving stage setting journey for all who choose to enter the world of Eternal Garden.</div>
+            </div>
         </div>
         <div class="page">
             <div class="gallery" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 60vh;">
@@ -306,7 +306,9 @@
     document.addEventListener('DOMContentLoaded', function() {
         const title = document.getElementById('zeroTitle');
         const desc = document.getElementById('zeroDesc');
-        if (title && desc) {
+        const zerocapsule1 = document.getElementById('zerocapsule1');
+        const codex = document.getElementById('codex');
+        if (title && desc && zerocapsule1 && codex) {
             const titleText = 'ETERNAL GARDEN // ZERO';
             const descText = 'ZERO serves as an exploration into how artists can blur the lines between mediums to create an immersive and impactful storytelling experience. Weaving the mediums of music, narration, imagery and animation together, while combining production tools with artificial intelligence, ZERO is a dynamic and evolving stage setting journey for all who choose to enter the world of Eternal Garden.';
             const descText2 = 'The CODEX is your key to the Eternal Garden universe. While the CODEX carries many answers to the story of Eternal Garden, it leaves us with even more questions. The book has been engineered to bring the secrets of the garden to life with audio and video experiences. In addition to fantastical visuals, the book also has an AR component; scan each page and experience animation, narrations, and original music.';
@@ -316,6 +318,9 @@
                 setTimeout(function() {
                     typeWriter(desc, descText, 72, function() {
                         setTimeout(function() {
+                            zerocapsule1.style.opacity = '0';
+                            codex.style.left = '0';
+                            codex.style.opacity = '1';
                             desc.innerHTML = '';
                             typeWriter(desc, descText2, 60);
                         }, 400);
