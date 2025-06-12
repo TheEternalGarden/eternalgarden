@@ -204,10 +204,10 @@
         <div class="page">
             <div class="title" id="zeroTitle">ETERNAL GARDEN // ZERO</div>
             <div class="gallery" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 60vh; position: relative;">
-                <video id="zeroVideo1" class="hovering-video fade-in" src="/media/videos/zerocapsule1.mp4" autoplay muted playsinline style="max-width: 100%; max-height: 100%; display: block;"></video>
-                <video id="zeroVideo2" class="hovering-video fade-out" src="/media/videos/codex.mp4" muted playsinline style="max-width: 100%; max-height: 100%; display: block;"></video>
+                <video id="zeroVideo1" class="hovering-video fade-in" src="/media/videos/zerocapsule1.mp4" autoplay muted playsinline preload="auto" style="max-width: 100%; max-height: 100%; display: block;"></video>
+                <video id="zeroVideo2" class="hovering-video fade-out" src="/media/videos/codex.mp4" autoplay muted playsinline preload="auto" style="max-width: 100%; max-height: 100%; display: block;"></video>
             </div>
-            <div class="description" id="zeroDesc" style="font-family: Arial, Helvetica, sans-serif;">ZERO serves as an exploration into how artists can blur the lines between mediums to create an immersive and impactful storytelling experience. Weaving the mediums of music, narration, imagery and animation together, while combining production tools with artificial intelligence, ZERO is a dynamic and evolving stage setting journey for all who choose to enter the world of Eternal Garden.</div>
+            <div class="description" id="zeroDesc" style="font-family: Arial, Helvetica, sans-serif; margin-top: 70px;">ZERO serves as an exploration into how artists can blur the lines between mediums to create an immersive and impactful storytelling experience. Weaving the mediums of music, narration, imagery and animation together, while combining production tools with artificial intelligence, ZERO is a dynamic and evolving stage setting journey for all who choose to enter the world of Eternal Garden.</div>
             <div id="down-arrow" style="position: absolute; left: 50%; bottom: 30px; transform: translateX(-50%); font-size: 2.5rem; color: #fff; opacity: 0.7; cursor: pointer; z-index: 2100; user-select: none;">&#8595;</div>
         </div>
         <div class="page">
@@ -218,8 +218,7 @@
         </div>
         <div class="page">
             <div class="gallery" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 60vh; position: relative;">
-                <video id="albumVideo1" class="hovering-video fade-in" src="/media/videos/album.mp4" autoplay muted playsinline style="max-width: 100%; max-height: 100%; display: block;"></video>
-                <video id="albumVideo2" class="hovering-video fade-out" src="/media/videos/album.mp4" muted playsinline style="max-width: 100%; max-height: 100%; display: block;"></video>
+                <video id="albumVideo1" class="hovering-video fade-out" src="/media/videos/album.mp4" autoplay muted playsinline preload="auto" style="max-width: 100%; max-height: 100%; display: block;"></video>
             </div>
             <div class="description" style="margin-top: 90px;">The ZERO music album features six tracks from six independent artists in collaboration with Garden X and serves as the soundtrack to the Codex. In addition to their own tracks on the album, each featured artist will embark on a transformative journey to become a main character in the expansive storyline of Eternal Garden. This is the first RPG that musicians play using their creativity.</div>
         </div>
@@ -323,7 +322,8 @@
     document.addEventListener('DOMContentLoaded', function() {
         const video1 = document.getElementById('zeroVideo1');
         const video2 = document.getElementById('zeroVideo2');
-        if (video1 && video2) {
+        const album1 = document.getElementById('albumVideo1');
+        if (video1 && video2 && album1) {
             video1.addEventListener('ended', function() {
                 video1.classList.remove('fade-in');
                 video1.classList.add('fade-out');
@@ -335,42 +335,11 @@
                     video2.play();
                 }, 1200);
             });
-            // Optionally, fade back to video1 when video2 ends (loop effect)
             video2.addEventListener('ended', function() {
                 video2.classList.remove('fade-in');
                 video2.classList.add('fade-out');
                 setTimeout(function() {
                     video2.style.display = 'none';
-                    video1.classList.remove('fade-out');
-                    video1.classList.add('fade-in');
-                    video1.style.display = 'block';
-                    video1.play();
-                }, 1200);
-            });
-        }
-    });
-
-    // Album video fade transition logic for ZERO page
-    document.addEventListener('DOMContentLoaded', function() {
-        const album1 = document.getElementById('albumVideo1');
-        const album2 = document.getElementById('albumVideo2');
-        if (album1 && album2) {
-            album1.addEventListener('ended', function() {
-                album1.classList.remove('fade-in');
-                album1.classList.add('fade-out');
-                setTimeout(function() {
-                    album1.style.display = 'none';
-                    album2.classList.remove('fade-out');
-                    album2.classList.add('fade-in');
-                    album2.style.display = 'block';
-                    album2.play();
-                }, 1200);
-            });
-            album2.addEventListener('ended', function() {
-                album2.classList.remove('fade-in');
-                album2.classList.add('fade-out');
-                setTimeout(function() {
-                    album2.style.display = 'none';
                     album1.classList.remove('fade-out');
                     album1.classList.add('fade-in');
                     album1.style.display = 'block';
