@@ -146,6 +146,18 @@
             gap: 40px;
             align-items: center;
         }
+
+        .typewriter-cursor {
+            display: inline-block;
+            width: 1ch;
+            animation: blink 1s steps(1) infinite;
+            color: #32B57C;
+            font-weight: bold;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
     </style>
 </head>
 <body>
@@ -167,11 +179,11 @@
     </div>
     <div class="scroll-container">
         <div class="page">
-            <div class="title">ETERNAL GARDEN // ZERO</div>
+            <div class="title" id="zeroTitle">ETERNAL GARDEN // ZERO</div>
             <div class="gallery" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 60vh;">
                 <video src="/media/videos/zerocapsule1.mp4" autoplay loop muted playsinline style="max-width: 100%; max-height: 100%; display: block;"></video>
             </div>
-            <div class="description" style="font-family: Arial, Helvetica, sans-serif;">ZERO serves as an exploration into how artists can blur the lines between mediums to create an immersive and impactful storytelling experience. Weaving the mediums of music, narration, imagery and animation together, while combining production tools with artificial intelligence, ZERO is a dynamic and evolving stage setting journey for all who choose to enter the world of Eternal Garden.</div>
+            <div class="description" id="zeroDesc" style="font-family: Arial, Helvetica, sans-serif;">ZERO serves as an exploration into how artists can blur the lines between mediums to create an immersive and impactful storytelling experience. Weaving the mediums of music, narration, imagery and animation together, while combining production tools with artificial intelligence, ZERO is a dynamic and evolving stage setting journey for all who choose to enter the world of Eternal Garden.</div>
             <div id="down-arrow" style="position: absolute; left: 50%; bottom: 30px; transform: translateX(-50%); font-size: 2.5rem; color: #fff; opacity: 0.7; cursor: pointer; z-index: 2100; user-select: none;">&#8595;</div>
         </div>
         <div class="page">
@@ -244,6 +256,40 @@
                 if (pages.length > 1) {
                     pages[1].scrollIntoView({ behavior: 'smooth' });
                 }
+            });
+        }
+    });
+
+    // Typewriter effect for ZERO first page
+    function typeWriter(element, text, speed, callback) {
+        let i = 0;
+        if (element.querySelector('.typewriter-cursor')) {
+            element.querySelector('.typewriter-cursor').remove();
+        }
+        function typing() {
+            if (i < text.length) {
+                element.innerHTML = text.substring(0, i + 1) + '<span class="typewriter-cursor">|</span>';
+                i++;
+                setTimeout(typing, speed);
+            } else {
+                element.innerHTML = text + '<span class="typewriter-cursor">|</span>';
+                if (callback) callback();
+            }
+        }
+        typing();
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+        const title = document.getElementById('zeroTitle');
+        const desc = document.getElementById('zeroDesc');
+        if (title && desc) {
+            const titleText = 'ETERNAL GARDEN // ZERO';
+            const descText = 'ZERO serves as an exploration into how artists can blur the lines between mediums to create an immersive and impactful storytelling experience. Weaving the mediums of music, narration, imagery and animation together, while combining production tools with artificial intelligence, ZERO is a dynamic and evolving stage setting journey for all who choose to enter the world of Eternal Garden.';
+            title.innerHTML = '';
+            desc.innerHTML = '';
+            typeWriter(title, titleText, 120, function() {
+                setTimeout(function() {
+                    typeWriter(desc, descText, 36);
+                }, 600);
             });
         }
     });
