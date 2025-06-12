@@ -121,4 +121,8 @@ html, body {
 
 body.story-page {
   font-family: 'HeliosExt', Arial, Helvetica, sans-serif;
+}
+
+body.zero-page {
+  font-family: 'HeliosExt', Arial, Helvetica, sans-serif;
 } 
