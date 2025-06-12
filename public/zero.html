@@ -206,7 +206,7 @@
                 <video id="zerocapsule1" src="/media/videos/zerocapsule1.mp4" autoplay loop muted playsinline style="width: 100vw; height: 100vh; object-fit: cover; position: absolute; top: 0; left: 0; transition: opacity 1s ease-in-out; opacity: 0.35;"></video>
                 <video id="codex" src="/media/videos/codex.mp4" autoplay loop muted playsinline style="width: 100vw; height: 100vh; object-fit: cover; position: absolute; top: 0; left: 100%; opacity: 0.04; transition: left 1s ease-in-out, opacity 1s ease-in-out;"></video>
                 <video id="album" src="/media/videos/album.mp4" autoplay loop muted playsinline style="width: 100vw; height: 100vh; object-fit: cover; position: absolute; top: 0; left: 100vw; opacity: 0.18; transition: left 1s ease-in-out, opacity 1s ease-in-out;"></video>
-                <video id="gardener" src="/media/videos/gardenershoe.mp4" autoplay loop muted playsinline style="width: 100vw; height: 100vh; object-fit: cover; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1s ease-in-out;"></video>
+                <video id="gardener" src="/media/videos/gardenershoe.mp4" autoplay loop muted playsinline style="width: 100vw; height: 100vh; object-fit: cover; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1s ease-in-out; opacity: 0.12;"></video>
             </div>
             <div class="content" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: white; z-index: 2;">
                 <h1 id="zeroTitle" class="typewriter" style="font-family: 'Courier New', monospace; font-size: 2em; margin-bottom: 8px; margin-top: 60px;">ETERNAL GARDEN // ZERO</h1>
@@ -313,6 +313,7 @@
         const album = document.getElementById('album');
         const gardener = document.getElementById('gardener');
         const albumDescText = 'The ZERO music album features six tracks from six independent artists in collaboration with Garden X and serves as the soundtrack to the Codex. In addition to their own tracks on the album, each featured artist will embark on a transformative journey to become a main character in the expansive storyline of Eternal Garden. This is the first RPG that musicians play using their creativity.';
+        const gardenerDescText = 'GDNR 1 is a symbolic element of the ZERO experience and story. Serving as a conceptual representation of The Gardener\'s secrets and power, this shoe is a pioneer to the inevitable future of fashion and storytelling';
         if (title && desc && zerocapsule1 && codex && album && gardener) {
             const titleText = 'ETERNAL GARDEN // ZERO';
             const descText = 'ZERO serves as an exploration into how artists can blur the lines between mediums to create an immersive and impactful storytelling experience. Weaving the mediums of music, narration, imagery and animation together, while combining production tools with artificial intelligence, ZERO is a dynamic and evolving stage setting journey for all who choose to enter the world of Eternal Garden.';
@@ -338,6 +339,8 @@
                                         setTimeout(function() {
                                             album.style.opacity = '0';
                                             gardener.style.opacity = '1';
+                                            desc.innerHTML = '';
+                                            typeWriter(desc, gardenerDescText, 60);
                                         }, 400);
                                     });
                                 }, 400);
