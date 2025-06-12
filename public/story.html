@@ -120,6 +120,14 @@
             font-weight: 400;
             letter-spacing: 2px;
         }
+        .page-turn {
+            animation: pageTurn 1s cubic-bezier(0.77,0,0.175,1) forwards;
+        }
+        @keyframes pageTurn {
+            0% { transform: rotateY(0deg) scale(1); z-index: 2; }
+            50% { transform: rotateY(-90deg) scale(1.05); z-index: 2; }
+            100% { transform: rotateY(-180deg) scale(1); z-index: 1; opacity: 0; }
+        }
     </style>
 </head>
 <body>
@@ -334,6 +342,47 @@
                 }
             }
             type();
+        });
+
+        // Page turn effect for gallery1
+        document.addEventListener('DOMContentLoaded', function() {
+            const gallery = document.getElementById('gallery1');
+            const items = Array.from(gallery.children);
+            let currentIndex = 0;
+            let turning = false;
+
+            function showItem(index) {
+                items.forEach((item, i) => {
+                    item.style.display = i === index ? 'block' : 'none';
+                    item.classList.remove('page-turn');
+                    item.style.transform = '';
+                    item.style.opacity = i === index ? '1' : '0';
+                });
+            }
+
+            function turnPage(nextIndex) {
+                if (turning) return;
+                turning = true;
+                const current = items[currentIndex];
+                current.classList.add('page-turn');
+                setTimeout(() => {
+                    current.classList.remove('page-turn');
+                    current.style.display = 'none';
+                    current.style.opacity = '0';
+                    currentIndex = nextIndex;
+                    showItem(currentIndex);
+                    turning = false;
+                }, 1000);
+            }
+
+            // Initial display
+            showItem(currentIndex);
+
+            // Auto page turn every 10 seconds
+            setInterval(() => {
+                const nextIndex = (currentIndex + 1) % items.length;
+                turnPage(nextIndex);
+            }, 10000);
         });
     </script>
     <script src="script.js"></script>
