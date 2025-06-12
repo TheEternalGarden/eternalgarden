@@ -36,6 +36,17 @@
             text-align: center;
             opacity: 0.9;
         }
+        .typewriter-cursor {
+            display: inline-block;
+            width: 1ch;
+            animation: blink 1s steps(1) infinite;
+            color: #32B57C;
+            font-weight: bold;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
     </style>
 </head>
 <body>
@@ -62,16 +73,23 @@
     </div>
     <script src="script.js"></script>
     <script>
-    // Typewriter effect for multiple elements in sequence
+    // Typewriter effect for multiple elements in sequence, with persistent blinking cursor
     function typeWriter(element, text, speed, callback) {
         let i = 0;
+        let cursor;
+        // Remove any existing cursor
+        if (element.querySelector('.typewriter-cursor')) {
+            element.querySelector('.typewriter-cursor').remove();
+        }
         function typing() {
             if (i < text.length) {
-                element.innerHTML += text.charAt(i);
+                element.innerHTML = text.substring(0, i + 1) + '<span class="typewriter-cursor">|</span>';
                 i++;
                 setTimeout(typing, speed);
-            } else if (callback) {
-                callback();
+            } else {
+                // Keep the cursor visible after typing
+                element.innerHTML = text + '<span class="typewriter-cursor">|</span>';
+                if (callback) callback();
             }
         }
         typing();
@@ -83,14 +101,14 @@
         title.innerHTML = '';
         about.innerHTML = '';
         founded.innerHTML = '';
-        typeWriter(title, 'ETERNAL GARDEN', 60, function() {
+        typeWriter(title, 'ETERNAL GARDEN', 120, function() {
             setTimeout(function() {
-                typeWriter(about, 'Eternal Garden is a sci-fi fantasy epic about a mystical seed with the power to spawn infinite worlds.', 24, function() {
+                typeWriter(about, 'Eternal Garden is a sci-fi fantasy epic about a mystical seed with the power to spawn infinite worlds.', 48, function() {
                     setTimeout(function() {
-                        typeWriter(founded, 'Founded in 2022', 32);
-                    }, 300);
+                        typeWriter(founded, 'Founded in 2022', 64);
+                    }, 400);
                 });
-            }, 400);
+            }, 600);
         });
     });
     </script>
