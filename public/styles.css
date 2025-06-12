@@ -110,4 +110,15 @@ html, body {
 .menu-items ul li a:hover {
     color: #888;
     transform: scale(1.1);
+}
+
+@font-face {
+  font-family: 'HeliosExt';
+  src: url('/fonts/HeliosExt.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body.story-page {
+  font-family: 'HeliosExt', Arial, Helvetica, sans-serif;
 } 
