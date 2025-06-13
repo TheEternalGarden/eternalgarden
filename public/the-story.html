@@ -149,6 +149,24 @@
             const nextButton = document.getElementById('nextButton');
             let currentIndex = 0;
             let isAnimating = false;
+            let autoFlipTimer = null;
+            const AUTO_FLIP_INTERVAL = 10000; // 10 seconds
+
+            function startAutoFlip() {
+                clearAutoFlip();
+                autoFlipTimer = setTimeout(() => {
+                    if (currentIndex < images.length - 1 && !isAnimating) {
+                        updateGallery(currentIndex + 1, 'right');
+                        startAutoFlip();
+                    }
+                }, AUTO_FLIP_INTERVAL);
+            }
+            function clearAutoFlip() {
+                if (autoFlipTimer) {
+                    clearTimeout(autoFlipTimer);
+                    autoFlipTimer = null;
+                }
+            }
 
             function updateGallery(newIndex, direction) {
                 if (typeof newIndex === 'number' && newIndex !== currentIndex) {
@@ -166,6 +184,7 @@
                         isAnimating = false;
                         prevButton.disabled = currentIndex === 0;
                         nextButton.disabled = currentIndex === images.length - 1;
+                        startAutoFlip();
                     }, 600);
                 } else {
                     images.forEach((img, index) => {
@@ -176,20 +195,24 @@
                     });
                     prevButton.disabled = currentIndex === 0;
                     nextButton.disabled = currentIndex === images.length - 1;
+                    startAutoFlip();
                 }
             }
 
             prevButton.addEventListener('click', () => {
                 if (currentIndex > 0 && !isAnimating) {
                     updateGallery(currentIndex - 1, 'left');
+                    startAutoFlip();
                 }
             });
             nextButton.addEventListener('click', () => {
                 if (currentIndex < images.length - 1 && !isAnimating) {
                     updateGallery(currentIndex + 1, 'right');
+                    startAutoFlip();
                 }
             });
             updateGallery();
+            startAutoFlip();
         });
     </script>
 </body>
