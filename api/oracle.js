@@ -1,9 +1,8 @@
-const { Configuration, OpenAIApi } = require('openai');
+const OpenAI = require("openai");
 
-const configuration = new Configuration({
+const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
-const openai = new OpenAIApi(configuration);
 
 module.exports = async (req, res) => {
   if (req.method !== 'POST') {
@@ -14,12 +13,12 @@ module.exports = async (req, res) => {
     return res.status(400).json({ error: 'Invalid conversation format.' });
   }
   try {
-    const completion = await openai.createChatCompletion({
+    const completion = await openai.chat.completions.create({
       model: 'gpt-3.5-turbo',
       messages: conversation,
       max_tokens: 500,
     });
-    const reply = completion.data.choices[0].message.content.trim();
+    const reply = completion.choices[0].message.content.trim();
     res.status(200).json({ reply });
   } catch (err) {
     res.status(500).json({ error: 'OpenAI API error.' });
