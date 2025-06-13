@@ -21,6 +21,11 @@ module.exports = async (req, res) => {
     const reply = completion.choices[0].message.content.trim();
     res.status(200).json({ reply });
   } catch (err) {
-    res.status(500).json({ error: 'OpenAI API error.' });
+    console.error('OpenAI API error:', err);
+    res.status(500).json({ 
+      error: 'OpenAI API error.', 
+      details: err.message || err.toString(), 
+      stack: err.stack 
+    });
   }
 }; 
