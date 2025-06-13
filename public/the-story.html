@@ -33,6 +33,57 @@
             opacity: 0.7;
             margin-top: 16px;
         }
+        .gallery-container {
+            position: relative;
+            width: 100vw;
+            max-width: 900px;
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+        }
+        .gallery-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            pointer-events: none;
+        }
+        .gallery-image.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            z-index: 2;
+            pointer-events: none;
+        }
+        .nav-button {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 15px 25px;
+            cursor: pointer;
+            font-size: 1.5em;
+            transition: background 0.3s;
+            pointer-events: auto;
+        }
+        .nav-button:hover {
+            background: rgba(255,255,255,0.4);
+        }
+        .nav-button:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 <body>
@@ -45,18 +96,64 @@
         <nav class="menu-items">
             <ul>
                 <li><a href="index.html">HOME</a></li>
+                <li><a href="the-story.html">THE STORY</a></li>
                 <li><a href="soundtrack.html">SOUNDTRACK</a></li>
                 <li><a href="zero.html">ZERO</a></li>
                 <li><a href="about.html">ABOUT</a></li>
                 <li><a href="oracle.html">ORACLE</a></li>
-                <li><a href="the-story.html">THE STORY</a></li>
             </ul>
         </nav>
     </div>
     <div class="the-story-container">
         <div class="the-story-title">THE STORY</div>
-        <div class="the-story-placeholder">This is THE STORY page. Content coming soon.</div>
+        <div class="gallery-container">
+            <img src="media/images2/1jpg.jpg" class="gallery-image active" alt="Story Image 1">
+            <img src="media/images2/2jpg.jpg" class="gallery-image" alt="Story Image 2">
+            <img src="media/images2/3jpg.jpg" class="gallery-image" alt="Story Image 3">
+            <img src="media/images2/4jpg.jpg" class="gallery-image" alt="Story Image 4">
+            <img src="media/images2/5jpg.jpg" class="gallery-image" alt="Story Image 5">
+            <img src="media/images2/6jpg.jpg" class="gallery-image" alt="Story Image 6">
+            <img src="media/images2/7jpg.jpg" class="gallery-image" alt="Story Image 7">
+            <img src="media/images2/8jpg.jpg" class="gallery-image" alt="Story Image 8">
+            <div class="gallery-nav">
+                <button class="nav-button" id="prevButton">←</button>
+                <button class="nav-button" id="nextButton">→</button>
+            </div>
+        </div>
     </div>
     <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('.gallery-image');
+            const prevButton = document.getElementById('prevButton');
+            const nextButton = document.getElementById('nextButton');
+            let currentIndex = 0;
+
+            function updateGallery() {
+                images.forEach((img, index) => {
+                    img.classList.remove('active');
+                    if (index === currentIndex) {
+                        img.classList.add('active');
+                    }
+                });
+                prevButton.disabled = currentIndex === 0;
+                nextButton.disabled = currentIndex === images.length - 1;
+            }
+
+            prevButton.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    updateGallery();
+                }
+            });
+            nextButton.addEventListener('click', () => {
+                if (currentIndex < images.length - 1) {
+                    currentIndex++;
+                    updateGallery();
+                }
+            });
+            updateGallery();
+        });
+    </script>
 </body>
 </html> 
