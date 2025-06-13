@@ -186,21 +186,7 @@
 
     <div class="gallery-container">
         <!-- Gallery 1 -->
-        <!-- <div class="gallery-title">Gallery 1</div> -->
-        <button class="arrow left" data-gallery="gallery1" aria-label="Previous image">&#8592;</button>
-        <button class="arrow right" data-gallery="gallery1" aria-label="Next image">&#8594;</button>
-        <div class="horizontal-gallery" id="gallery1">
-            <img src="media/images2/1.jpg" alt="Story Image 1">
-            <img src="media/images2/2.jpg" alt="Story Image 2">
-            <img src="media/images2/3.png" alt="Story Image 3">
-            <img src="media/images2/4.jpg" alt="Story Image 4">
-            <img src="media/images2/5.jpg" alt="Story Image 5">
-            <img src="media/images2/6.jpg" alt="Story Image 6">
-            <img src="media/images2/7.jpg" alt="Story Image 7">
-            <img src="media/images2/8.jpg" alt="Story Image 8">
-            <video src="media/videos/zerocapsule.mp4" controls></video>
-        </div>
-        <div class="nav-indicators" id="navIndicators1"></div>
+        <!-- Removed gallery1 and its navigation -->
 
         <!-- Gallery 2 -->
         <!-- <div class="gallery-title">Gallery 2</div> -->
@@ -343,7 +329,7 @@
         }
 
         // Initialize all galleries
-        for (let i = 1; i <= 5; i++) {
+        for (let i = 2; i <= 5; i++) {
             initializeGallery(`gallery${i}`);
             // Patch: make first item visible by default
             const gallery = document.getElementById(`gallery${i}`);
