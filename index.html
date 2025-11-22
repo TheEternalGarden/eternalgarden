@@ -6,6 +6,10 @@
     <title>Eternal Garden</title>
     <link rel="stylesheet" href="styles.css">
     <style>
+        html {
+            scroll-behavior: auto; /* Let Lenis handle scrolling */
+        }
+        
         body {
             background: #000;
             margin: 0;
@@ -14,6 +18,26 @@
             color: #fff;
             overflow-x: hidden;
             overflow-y: auto;
+        }
+        
+        html.lenis {
+            height: auto;
+        }
+        
+        .lenis.lenis-smooth {
+            scroll-behavior: auto !important;
+        }
+        
+        .lenis.lenis-smooth [data-lenis-prevent] {
+            overscroll-behavior: contain;
+        }
+        
+        .lenis.lenis-stopped {
+            overflow: hidden;
+        }
+        
+        .lenis.lenis-scrolling iframe {
+            pointer-events: none;
         }
         
         .homepage-section {
@@ -427,6 +451,8 @@
         </div>
     </div>
 
+    <!-- Lenis Smooth Scroll -->
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
     <script src="script.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -486,6 +512,43 @@
             
             // Start the typewriter sequence
             setTimeout(typeTitle, 500);
+        });
+        
+        // Initialize Lenis smooth scroll with elastic bounce
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            smooth: true,
+            smoothTouch: false,
+            touchMultiplier: 2,
+            infinite: false,
+        });
+        
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        
+        requestAnimationFrame(raf);
+        
+        // Preserve anchor link functionality
+        lenis.on('scroll', ({ scroll, limit, velocity, direction, progress }) => {
+            // Allow anchor links to work
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    if (href !== '#' && href.startsWith('#')) {
+                        e.preventDefault();
+                        const target = document.querySelector(href);
+                        if (target) {
+                            lenis.scrollTo(target, {
+                                offset: 0,
+                                duration: 1.5,
+                            });
+                        }
+                    }
+                });
+            });
         });
     </script>
 </body>
