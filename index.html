@@ -47,8 +47,8 @@
         
         .media-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-template-rows: repeat(2, 1fr);
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: 1fr;
             gap: 30px;
             width: 100%;
             max-width: 1400px;
@@ -112,20 +112,32 @@
             }
             
             .media-grid {
-                grid-template-columns: 1fr;
-                grid-template-rows: repeat(4, 1fr);
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(2, 1fr);
                 height: auto;
                 min-height: 80vh;
                 gap: 20px;
             }
             
             .media-box-title {
-                font-size: 2rem;
+                font-size: 1.5rem;
                 letter-spacing: 4px;
             }
             
             .media-box:hover .media-box-title {
-                font-size: 2.2rem;
+                font-size: 1.7rem;
+            }
+        }
+        
+        @media screen and (max-width: 480px) {
+            .media-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(4, 1fr);
+            }
+            
+            .media-box-title {
+                font-size: 1.2rem;
+                letter-spacing: 2px;
             }
         }
         
