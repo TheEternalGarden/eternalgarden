@@ -5,77 +5,143 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KINDRED</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
         body {
             background: #000;
             margin: 0;
             padding: 0;
-            font-family: 'HeliosExt', Arial, Helvetica, sans-serif;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
             color: #fff;
             overflow: hidden;
         }
         
-        #three-container {
+        .kindred-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            z-index: 2;
+        }
+        
+        .kindred-video {
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            pointer-events: none;
+        }
+        
+        .kindred-video.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .page-title {
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            font-size: 1em;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-align: center;
+            z-index: 1000;
+            font-family: 'HeliosExt', Arial, Helvetica, sans-serif;
+        }
+        
+        .coming-soon-text {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            font-size: 1em;
+            font-weight: 300;
+            letter-spacing: 3px;
+            text-align: center;
+            z-index: 1000;
+        }
+        
+        .fade-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            z-index: 1;
-        }
-        
-        .story-text-container {
-            position: fixed;
-            bottom: 100px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1000;
-            max-width: 800px;
-            padding: 30px 40px;
-            background: rgba(0, 0, 0, 0.8);
-            border: 1px solid rgba(255, 100, 0, 0.4);
-            border-radius: 10px;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-            pointer-events: none;
-            backdrop-filter: blur(10px);
-        }
-        
-        .story-text-container.visible {
-            opacity: 1;
-        }
-        
-        .story-text {
-            font-size: 1rem;
-            font-weight: 300;
-            line-height: 1.8;
-            letter-spacing: 2px;
-            text-align: center;
-            color: #fff;
-            font-family: 'HeliosExt', Arial, Helvetica, sans-serif;
-            text-shadow: 0 0 10px rgba(255, 100, 0, 0.5);
-        }
-        
-        .story-progress {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            background: #000;
             z-index: 500;
-            font-size: 3rem;
-            font-weight: 300;
-            letter-spacing: 8px;
-            color: rgba(255, 100, 0, 0.5);
-            font-family: 'HeliosExt', Arial, Helvetica, sans-serif;
-            pointer-events: none;
             opacity: 0;
-            transition: opacity 1s ease-in-out;
-            text-shadow: 0 0 20px rgba(255, 100, 0, 0.8);
+            transition: opacity 2s ease-in-out;
+            pointer-events: none;
         }
         
-        .story-progress.visible {
+        .fade-overlay.active {
             opacity: 1;
+        }
+        
+        .final-content {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 600;
+            opacity: 1;
+            transition: opacity 2s ease-in-out;
+            padding: 50px;
+            box-sizing: border-box;
+        }
+        
+        .final-content.fade-out {
+            opacity: 0;
+        }
+        
+        .kindred-title {
+            font-size: 2rem;
+            font-weight: 300;
+            letter-spacing: 4px;
+            text-align: center;
+            margin-bottom: 40px;
+            font-family: 'HeliosExt', Arial, Helvetica, sans-serif;
+        }
+        
+        .kindred-description {
+            font-size: 0.8rem;
+            font-weight: 300;
+            line-height: 1.6;
+            text-align: center;
+            max-width: 800px;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+            font-family: 'HeliosExt', Arial, Helvetica, sans-serif;
+        }
+        
+        .novel-coming-soon {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            text-align: center;
+            margin-top: 20px;
+            font-family: 'HeliosExt', Arial, Helvetica, sans-serif;
+        }
+        
+        .typewriter-cursor {
+            animation: blink 1s infinite;
+            color: #888;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
         }
         
         /* Ensure hamburger menu is visible */
@@ -127,322 +193,90 @@
             </ul>
         </nav>    </div>
     
-    <div id="three-container"></div>
+    <div class="kindred-container">
+        <div class="page-title" id="page-title"></div>
+        <video class="kindred-video" controls muted preload="metadata">
+            <source src="media/videos/kindredtrailer.mov" type="video/quicktime">
+            <source src="media/videos/kindredtrailer.mov" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
     
-    <div class="story-progress" id="story-progress">KINDRED</div>
+    <div class="fade-overlay" id="fade-overlay"></div>
     
-    <div class="story-text-container" id="story-text-container">
-        <div class="story-text" id="story-text"></div>
+    <div class="final-content" id="final-content">
+        <div class="kindred-title" id="kindred-title"></div>
+        <div class="kindred-description" id="kindred-description"></div>
+        <div class="novel-coming-soon" id="novel-coming-soon"></div>
     </div>
     
     <script src="script.js"></script>
     <script>
-        // Story segments that appear as character walks
-        const storySegments = [
-            {
-                position: 0,
-                text: "In the ash valleys of planet Phoenix..."
-            },
-            {
-                position: 5,
-                text: "A young Kindred girl named Red uncovers her innate power..."
-            },
-            {
-                position: 10,
-                text: "She questions the social chains forged by the ruling Elites..."
-            },
-            {
-                position: 15,
-                text: "Torn between dreams of rising beyond her lowborn status..."
-            },
-            {
-                position: 20,
-                text: "And the tug of a deeper calling..."
-            },
-            {
-                position: 25,
-                text: "Red goes on a journey that will entwine her fate..."
-            },
-            {
-                position: 30,
-                text: "With the Eternal Garden, and the truth behind Nexus's complex history."
-            }
-        ];
-        
-        let currentStoryIndex = 0;
-        let scene, camera, renderer, fireCharacter, ground;
-        let characterPosition = { x: 0, y: 0, z: -30 };
-        let targetPosition = { x: 0, y: 0, z: 30 };
-        let walkProgress = 0;
-        let animationId;
-        
-        // Initialize Three.js scene
-        function initScene() {
-            // Scene
-            scene = new THREE.Scene();
-            scene.fog = new THREE.Fog(0x000000, 10, 100);
-            
-            // Camera
-            camera = new THREE.PerspectiveCamera(
-                75,
-                window.innerWidth / window.innerHeight,
-                0.1,
-                1000
-            );
-            camera.position.set(0, 5, 10);
-            camera.lookAt(0, 0, 0);
-            
-            // Renderer
-            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(window.devicePixelRatio);
-            renderer.setClearColor(0x000000, 1);
-            document.getElementById('three-container').appendChild(renderer.domElement);
-            
-            // Lighting
-            const ambientLight = new THREE.AmbientLight(0x333333);
-            scene.add(ambientLight);
-            
-            const directionalLight = new THREE.DirectionalLight(0xff6600, 0.5);
-            directionalLight.position.set(5, 10, 5);
-            scene.add(directionalLight);
-            
-            // Point light for fire glow
-            const fireLight = new THREE.PointLight(0xff4400, 2, 50);
-            fireLight.position.set(0, 2, 0);
-            scene.add(fireLight);
-            
-            // Ground
-            const groundGeometry = new THREE.PlaneGeometry(200, 200);
-            const groundMaterial = new THREE.MeshStandardMaterial({
-                color: 0x1a1a1a,
-                roughness: 0.8,
-                metalness: 0.2
-            });
-            ground = new THREE.Mesh(groundGeometry, groundMaterial);
-            ground.rotation.x = -Math.PI / 2;
-            ground.position.y = 0;
-            scene.add(ground);
-            
-            // Create fire character
-            createFireCharacter();
-            
-            // Start animation
-            animate();
-            
-            // Handle window resize
-            window.addEventListener('resize', onWindowResize);
-        }
-        
-        function createFireCharacter() {
-            const fireGroup = new THREE.Group();
-            
-            // Body (glowing sphere as base)
-            const bodyGeometry = new THREE.SphereGeometry(0.8, 16, 16);
-            const bodyMaterial = new THREE.MeshBasicMaterial({
-                color: 0xff4400,
-                transparent: true,
-                opacity: 0.6
-            });
-            const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
-            fireGroup.add(body);
-            
-            // Fire particles system
-            const particleCount = 500;
-            const particles = new THREE.BufferGeometry();
-            const positions = new Float32Array(particleCount * 3);
-            const colors = new Float32Array(particleCount * 3);
-            const sizes = new Float32Array(particleCount);
-            
-            for (let i = 0; i < particleCount; i++) {
-                const i3 = i * 3;
-                
-                // Position particles around character
-                positions[i3] = (Math.random() - 0.5) * 2;
-                positions[i3 + 1] = Math.random() * 3;
-                positions[i3 + 2] = (Math.random() - 0.5) * 2;
-                
-                // Fire colors (orange to red to yellow)
-                const color = new THREE.Color();
-                const hue = Math.random() * 0.1 + 0.05;
-                const saturation = 0.8 + Math.random() * 0.2;
-                const lightness = 0.4 + Math.random() * 0.3;
-                color.setHSL(hue, saturation, lightness);
-                
-                colors[i3] = color.r;
-                colors[i3 + 1] = color.g;
-                colors[i3 + 2] = color.b;
-                
-                sizes[i] = Math.random() * 0.5 + 0.1;
-            }
-            
-            particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-            particles.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-            particles.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
-            
-            const particleMaterial = new THREE.ShaderMaterial({
-                uniforms: {
-                    time: { value: 0 }
-                },
-                vertexShader: `
-                    attribute float size;
-                    attribute vec3 color;
-                    varying vec3 vColor;
-                    uniform float time;
-                    
-                    void main() {
-                        vColor = color;
-                        vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-                        gl_PointSize = size * (300.0 / -mvPosition.z);
-                        gl_Position = projectionMatrix * mvPosition;
-                    }
-                `,
-                fragmentShader: `
-                    varying vec3 vColor;
-                    
-                    void main() {
-                        vec2 center = gl_PointCoord - vec2(0.5);
-                        float dist = length(center);
-                        if (dist > 0.5) discard;
-                        float alpha = 1.0 - smoothstep(0.0, 0.5, dist);
-                        gl_FragColor = vec4(vColor, alpha * 0.6);
-                    }
-                `,
-                transparent: true,
-                vertexColors: true,
-                blending: THREE.AdditiveBlending,
-                depthWrite: false
-            });
-            
-            const particleSystem = new THREE.Points(particles, particleMaterial);
-            fireGroup.add(particleSystem);
-            
-            // Store references for animation
-            fireCharacter = {
-                group: fireGroup,
-                body: body,
-                particles: particleSystem,
-                particleMaterial: particleMaterial,
-                particlePositions: positions,
-                fireLight: scene.children.find(child => child instanceof THREE.PointLight && child.color.getHex() === 0xff4400)
-            };
-            
-            // Set initial position
-            fireGroup.position.set(characterPosition.x, characterPosition.y, characterPosition.z);
-            scene.add(fireGroup);
-        }
-        
-        function animate() {
-            animationId = requestAnimationFrame(animate);
-            
-            const time = Date.now() * 0.001;
-            
-            // Animate fire particles
-            if (fireCharacter) {
-                const positions = fireCharacter.particlePositions;
-                const particleCount = positions.length / 3;
-                
-                for (let i = 0; i < particleCount; i++) {
-                    const i3 = i * 3;
-                    // Make particles move upward smoothly with turbulence
-                    const speed = 0.03 + Math.sin(time * 3 + i * 0.1) * 0.01;
-                    positions[i3 + 1] += speed;
-                    
-                    // Add horizontal drift for more natural fire movement
-                    positions[i3] += Math.sin(time * 2 + i * 0.2) * 0.01;
-                    positions[i3 + 2] += Math.cos(time * 1.5 + i * 0.15) * 0.01;
-                    
-                    // Reset particles that go too high, but smoothly
-                    if (positions[i3 + 1] > 3.5) {
-                        positions[i3 + 1] = -0.5;
-                        positions[i3] = (Math.random() - 0.5) * 2;
-                        positions[i3 + 2] = (Math.random() - 0.5) * 2;
-                    }
-                }
-                
-                fireCharacter.particles.geometry.attributes.position.needsUpdate = true;
-                fireCharacter.particleMaterial.uniforms.time.value = time;
-                
-                // Make body pulse
-                fireCharacter.body.scale.setScalar(1 + Math.sin(time * 3) * 0.1);
-            }
-            
-            // Animate walking
-            if (walkProgress < 1) {
-                walkProgress += 0.002;
-                
-                // Update character position (walking forward)
-                const currentZ = THREE.MathUtils.lerp(
-                    characterPosition.z,
-                    targetPosition.z,
-                    walkProgress
-                );
-                
-                if (fireCharacter) {
-                    fireCharacter.group.position.z = currentZ;
-                    
-                    // Walking animation (bobbing up and down)
-                    fireCharacter.group.position.y = Math.sin(walkProgress * Math.PI * 10) * 0.1;
-                    
-                    // Update fire light position
-                    if (fireCharacter.fireLight) {
-                        fireCharacter.fireLight.position.z = currentZ;
-                        fireCharacter.fireLight.position.y = 2 + Math.sin(walkProgress * Math.PI * 10) * 0.1;
-                    }
-                }
-                
-                // Update camera to follow character
-                camera.position.z = currentZ + 10;
-                camera.lookAt(0, 2, currentZ);
-                
-                // Check for story segments
-                const distanceWalked = (currentZ - characterPosition.z) + 30;
-                checkStorySegments(distanceWalked);
-            }
-            
-            renderer.render(scene, camera);
-        }
-        
-        function checkStorySegments(distance) {
-            if (currentStoryIndex < storySegments.length) {
-                const segment = storySegments[currentStoryIndex];
-                
-                if (distance >= segment.position) {
-                    showStoryText(segment.text);
-                    currentStoryIndex++;
-                }
-            }
-        }
-        
-        function showStoryText(text) {
-            const textContainer = document.getElementById('story-text-container');
-            const textElement = document.getElementById('story-text');
-            
-            textElement.textContent = text;
-            textContainer.classList.add('visible');
-            
-            // Hide after 4 seconds
-            setTimeout(() => {
-                textContainer.classList.remove('visible');
-            }, 4000);
-        }
-        
-        function onWindowResize() {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        }
-        
-        // Initialize when page loads
         document.addEventListener('DOMContentLoaded', function() {
-            // Show title briefly
-            const progressElement = document.getElementById('story-progress');
-            progressElement.classList.add('visible');
+            const video = document.querySelector('.kindred-video');
+            const fadeOverlay = document.getElementById('fade-overlay');
+            const finalContent = document.getElementById('final-content');
             
-            setTimeout(() => {
-                progressElement.classList.remove('visible');
-                initScene();
-            }, 2000);
+            
+            // Initial typewriter effects for final content
+            function startInitialTypewriter() {
+                // Typewriter for KINDRED title
+                const kindredTitle = document.getElementById('kindred-title');
+                const titleText = 'KINDRED';
+                let titleIndex = 0;
+                
+                function typeKindredTitle() {
+                    if (titleIndex < titleText.length) {
+                        kindredTitle.innerHTML = titleText.substring(0, titleIndex + 1) + '<span class="typewriter-cursor">|</span>';
+                        titleIndex++;
+                        setTimeout(typeKindredTitle, 150);
+                    } else {
+                        kindredTitle.innerHTML = titleText + '<span class="typewriter-cursor">|</span>';
+                        // Start description after title
+                        setTimeout(typeDescription, 1000);
+                    }
+                }
+                
+                // Typewriter for description
+                const kindredDescription = document.getElementById('kindred-description');
+                const descriptionText = 'In the ash valleys of planet Phoenix, a young Kindred girl named Red uncovers her innate power and questions the social chains forged by the ruling Elites of the Nexus solar system. Torn between dreams of rising beyond her lowborn status and the tug of a deeper calling, Red goes on a journey that will ultimately entwine her fate with the Eternal Garden, and the truth behind Nexus\'s complex history.';
+                let descIndex = 0;
+                
+                function typeDescription() {
+                    if (descIndex < descriptionText.length) {
+                        kindredDescription.innerHTML = descriptionText.substring(0, descIndex + 1) + '<span class="typewriter-cursor">|</span>';
+                        descIndex++;
+                        setTimeout(typeDescription, 50);
+                    } else {
+                        kindredDescription.innerHTML = descriptionText + '<span class="typewriter-cursor">|</span>';
+                        // Start "NOVEL COMING SOON" after description
+                        setTimeout(typeNovelComingSoon, 1000);
+                    }
+                }
+                
+                // Typewriter for "NOVEL COMING SOON"
+                const novelComingSoon = document.getElementById('novel-coming-soon');
+                const novelText = 'NOVEL COMING SOON';
+                let novelIndex = 0;
+                
+                function typeNovelComingSoon() {
+                    if (novelIndex < novelText.length) {
+                        novelComingSoon.innerHTML = novelText.substring(0, novelIndex + 1) + '<span class="typewriter-cursor">|</span>';
+                        novelIndex++;
+                        setTimeout(typeNovelComingSoon, 100);
+                    } else {
+                        novelComingSoon.innerHTML = novelText + '<span class="typewriter-cursor">|</span>';
+                        // Don't automatically start fade - wait for button click
+                        console.log('Text sequence complete - waiting for button click');
+                    }
+                }
+                
+                // Start the sequence
+                typeKindredTitle();
+            }
+            
+            // Start the initial typewriter sequence
+            startInitialTypewriter();
         });
     </script>
 </body>
