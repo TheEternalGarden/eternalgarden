@@ -42,6 +42,7 @@
         
         .homepage-section {
             min-height: 100vh;
+            height: 100vh;
             position: relative;
         }
         
@@ -419,6 +420,7 @@
         </button>
         </div>
     </div>
+    </div>
 
     <!-- Media Boxes Section -->
     <div class="media-section">
@@ -522,6 +524,8 @@
             smoothTouch: false,
             touchMultiplier: 2,
             infinite: false,
+            wrapper: window,
+            content: document.documentElement,
         });
         
         function raf(time) {
