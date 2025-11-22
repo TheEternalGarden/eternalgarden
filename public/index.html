@@ -74,11 +74,14 @@
             position: absolute;
             top: 0;
             left: 0;
+            min-height: 100%;
         }
         
         .media-box-content video {
             width: 100%;
             height: 100%;
+            min-width: 100%;
+            min-height: 100%;
             object-fit: cover;
             opacity: 0.7;
             display: block;
@@ -449,6 +452,32 @@
             
             // Start the typewriter sequence
             setTimeout(typeTitle, 500);
+            
+            // Ensure DARKSIDE video plays
+            const darksideVideo = document.querySelector('.media-box:nth-child(2) video');
+            if (darksideVideo) {
+                darksideVideo.muted = true;
+                darksideVideo.loop = true;
+                
+                // Try to play the video
+                const playDarksideVideo = () => {
+                    darksideVideo.play().catch(error => {
+                        console.error('Error playing DARKSIDE video:', error);
+                    });
+                };
+                
+                // Play when video is ready
+                if (darksideVideo.readyState >= 2) {
+                    playDarksideVideo();
+                } else {
+                    darksideVideo.addEventListener('loadeddata', playDarksideVideo);
+                    darksideVideo.addEventListener('canplay', playDarksideVideo);
+                }
+                
+                // Fallback: play on user interaction
+                document.addEventListener('click', playDarksideVideo, { once: true });
+                document.addEventListener('touchstart', playDarksideVideo, { once: true });
+            }
         });
     </script>
 </body>

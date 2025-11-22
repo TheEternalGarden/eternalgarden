@@ -74,11 +74,14 @@
             position: absolute;
             top: 0;
             left: 0;
+            min-height: 100%;
         }
         
         .media-box-content video {
             width: 100%;
             height: 100%;
+            min-width: 100%;
+            min-height: 100%;
             object-fit: cover;
             opacity: 0.7;
             display: block;
@@ -348,24 +351,24 @@
 
     <!-- Homepage Section -->
     <div class="homepage-section">
-        <!-- Intro Text Container -->
-        <div class="intro-text-container" id="introTextContainer">
-            <div class="eternal-garden-title" id="eternalGardenTitle"></div>
-            <div class="eternal-garden-subtext" id="eternalGardenSubtext"></div>
-        </div>
+    <!-- Intro Text Container -->
+    <div class="intro-text-container" id="introTextContainer">
+        <div class="eternal-garden-title" id="eternalGardenTitle"></div>
+        <div class="eternal-garden-subtext" id="eternalGardenSubtext"></div>
+    </div>
 
-        <!-- Video Container -->
-        <div class="video-container" id="videoContainer">
-            <video id="introVideo" loop playsinline webkit-playsinline preload="auto" autoplay muted>
-                <source src="./media/videos/gardenerintro.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <div id="videoError" class="video-error" style="display: none;">
-                Video failed to load. Please refresh the page.
-            </div>
-            <button id="volumeToggle" class="volume-toggle" aria-label="Toggle sound">
-                <span class="volume-icon">🔇</span>
-            </button>
+    <!-- Video Container -->
+    <div class="video-container" id="videoContainer">
+        <video id="introVideo" loop playsinline webkit-playsinline preload="auto" autoplay muted>
+            <source src="./media/videos/gardenerintro.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div id="videoError" class="video-error" style="display: none;">
+            Video failed to load. Please refresh the page.
+        </div>
+        <button id="volumeToggle" class="volume-toggle" aria-label="Toggle sound">
+            <span class="volume-icon">🔇</span>
+        </button>
         </div>
     </div>
 
@@ -455,6 +458,32 @@
             
             // Start the typewriter sequence
             setTimeout(typeTitle, 500);
+            
+            // Ensure DARKSIDE video plays
+            const darksideVideo = document.querySelector('.media-box:nth-child(2) video');
+            if (darksideVideo) {
+                darksideVideo.muted = true;
+                darksideVideo.loop = true;
+                
+                // Try to play the video
+                const playDarksideVideo = () => {
+                    darksideVideo.play().catch(error => {
+                        console.error('Error playing DARKSIDE video:', error);
+                    });
+                };
+                
+                // Play when video is ready
+                if (darksideVideo.readyState >= 2) {
+                    playDarksideVideo();
+                } else {
+                    darksideVideo.addEventListener('loadeddata', playDarksideVideo);
+                    darksideVideo.addEventListener('canplay', playDarksideVideo);
+                }
+                
+                // Fallback: play on user interaction
+                document.addEventListener('click', playDarksideVideo, { once: true });
+                document.addEventListener('touchstart', playDarksideVideo, { once: true });
+            }
         });
     </script>
 </body>
