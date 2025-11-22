@@ -42,7 +42,6 @@
         
         .homepage-section {
             min-height: 100vh;
-            height: 100vh;
             position: relative;
         }
         
@@ -523,9 +522,6 @@
             smooth: true,
             smoothTouch: false,
             touchMultiplier: 2,
-            infinite: false,
-            wrapper: window,
-            content: document.documentElement,
         });
         
         function raf(time) {
@@ -536,22 +532,19 @@
         requestAnimationFrame(raf);
         
         // Preserve anchor link functionality
-        lenis.on('scroll', ({ scroll, limit, velocity, direction, progress }) => {
-            // Allow anchor links to work
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    const href = this.getAttribute('href');
-                    if (href !== '#' && href.startsWith('#')) {
-                        e.preventDefault();
-                        const target = document.querySelector(href);
-                        if (target) {
-                            lenis.scrollTo(target, {
-                                offset: 0,
-                                duration: 1.5,
-                            });
-                        }
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && href.startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        lenis.scrollTo(target, {
+                            offset: 0,
+                            duration: 1.5,
+                        });
                     }
-                });
+                }
             });
         });
     </script>
