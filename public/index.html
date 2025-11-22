@@ -142,6 +142,116 @@
             font-size: 1.12rem;
         }
         
+        /* Footer Section */
+        .footer-section {
+            background: #000;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 80px 40px 40px 40px;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+        
+        .footer-column {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .footer-title {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 4px;
+            color: #fff;
+            margin-bottom: 20px;
+            font-family: 'HeliosExt', Arial, Helvetica, sans-serif;
+        }
+        
+        .footer-description {
+            font-size: 0.85rem;
+            font-weight: 300;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0;
+            font-family: 'HeliosExt', Arial, Helvetica, sans-serif;
+        }
+        
+        .footer-heading {
+            font-size: 0.9rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            color: #fff;
+            margin-bottom: 20px;
+            font-family: 'HeliosExt', Arial, Helvetica, sans-serif;
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+            font-family: 'HeliosExt', Arial, Helvetica, sans-serif;
+        }
+        
+        .footer-links a:hover {
+            color: #fff;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            text-align: center;
+        }
+        
+        .footer-copyright {
+            font-size: 0.75rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            color: rgba(255, 255, 255, 0.5);
+            margin: 0;
+            font-family: 'HeliosExt', Arial, Helvetica, sans-serif;
+        }
+        
+        /* Mobile responsive for footer */
+        @media screen and (max-width: 768px) {
+            .footer-section {
+                padding: 60px 20px 30px 20px;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 40px;
+                margin-bottom: 40px;
+            }
+        }
+        
+        @media screen and (max-width: 480px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+        
         /* Mobile responsive for media section */
         @media screen and (max-width: 768px) {
             .media-section {
@@ -421,6 +531,48 @@
             </div>
         </div>
     </div>
+
+    <!-- Footer Section -->
+    <footer class="footer-section">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3 class="footer-title">ETERNAL GARDEN</h3>
+                    <p class="footer-description">A sci-fi fantasy epic about a mystical seed with the power to spawn infinite worlds.</p>
+                </div>
+                <div class="footer-column">
+                    <h4 class="footer-heading">NAVIGATION</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#worlds">Worlds</a></li>
+                        <li><a href="#media">Media</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4 class="footer-heading">CONNECT</h4>
+                    <ul class="footer-links">
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#newsletter">Newsletter</a></li>
+                        <li><a href="#press">Press</a></li>
+                        <li><a href="#partners">Partners</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4 class="footer-heading">FOLLOW</h4>
+                    <ul class="footer-links">
+                        <li><a href="#instagram">Instagram</a></li>
+                        <li><a href="#twitter">Twitter</a></li>
+                        <li><a href="#youtube">YouTube</a></li>
+                        <li><a href="#discord">Discord</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-copyright">&copy; 2024 Eternal Garden. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
     <script src="script.js"></script>
     <script>
