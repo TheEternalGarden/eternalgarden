@@ -395,10 +395,7 @@
             </div>
             <div class="media-box">
                 <div class="media-box-content">
-                    <video loop playsinline webkit-playsinline autoplay muted preload="auto">
-                        <source src="./media/videos/DSRUNNINGVERTICAL.mov" type="video/quicktime">
-                        Your browser does not support the video tag.
-                    </video>
+                    <img src="./media/videos/darksidetk.jpeg" alt="DARKSIDE">
                 </div>
                 <div class="media-box-title">DARKSIDE</div>
             </div>
@@ -476,32 +473,6 @@
             
             // Start the typewriter sequence
             setTimeout(typeTitle, 500);
-            
-            // Ensure DARKSIDE video plays
-            const darksideVideo = document.querySelector('.media-box:nth-child(2) video');
-            if (darksideVideo) {
-                darksideVideo.muted = true;
-                darksideVideo.loop = true;
-                
-                // Try to play the video
-                const playDarksideVideo = () => {
-                    darksideVideo.play().catch(error => {
-                        console.error('Error playing DARKSIDE video:', error);
-                    });
-                };
-                
-                // Play when video is ready
-                if (darksideVideo.readyState >= 2) {
-                    playDarksideVideo();
-                } else {
-                    darksideVideo.addEventListener('loadeddata', playDarksideVideo);
-                    darksideVideo.addEventListener('canplay', playDarksideVideo);
-                }
-                
-                // Fallback: play on user interaction
-                document.addEventListener('click', playDarksideVideo, { once: true });
-                document.addEventListener('touchstart', playDarksideVideo, { once: true });
-            }
         });
     </script>
 </body>
