@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZERO - Eternal Garden</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background: #000;
+            color: #fff;
+            font-family: 'HeliosExt', Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            overflow-y: auto;
+        }
+        
+        .zero-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 50px 20px;
+            text-align: center;
+        }
+        
+        .zero-title {
+            font-size: 3rem;
+            font-weight: 300;
+            letter-spacing: 4px;
+            margin-bottom: 40px;
+            font-family: 'HeliosExt', Arial, Helvetica, sans-serif;
+        }
+        
+        .zero-description {
+            font-size: 1rem;
+            font-weight: 300;
+            line-height: 1.6;
+            max-width: 800px;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+            font-family: 'HeliosExt', Arial, Helvetica, sans-serif;
+        }
+        
+        .typewriter-cursor {
+            animation: blink 1s infinite;
+            color: #888;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        /* Ensure hamburger menu is visible */
+        .hamburger-menu {
+            position: fixed !important;
+            top: 20px !important;
+            right: 20px !important;
+            z-index: 9999 !important;
+        }
+        
+        .hamburger-icon {
+            z-index: 10000 !important;
+        }
+        
+        .hamburger-icon span {
+            background: #fff !important;
+        }
+        
+        /* Mobile responsive styles */
+        @media screen and (max-width: 768px) {
+            .zero-title {
+                font-size: 2rem;
+            }
+            
+            .zero-description {
+                font-size: 0.9rem;
+                padding: 0 20px;
+            }
+        }
+        
+        @media screen and (max-width: 480px) {
+            .zero-title {
+                font-size: 1.5rem;
+            }
+            
+            .zero-description {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hamburger-menu">
+        <div class="hamburger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav class="menu-items">
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li>
+                    <a href="#" style="pointer-events: none; cursor: default;">STORY</a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="codex.html">CODEX</a>
+                            <ul class="submenu">
+                                <li><a href="zero-codx.html">ZERO</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="kindred.html">KINDRED</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" style="pointer-events: none; cursor: default;">PROJECTS</a>
+                    <ul class="sub-menu">
+                        <li><a href="rebirth.html">REBIRTH</a></li>
+                        <li><a href="darkside.html">DARKSIDE</a></li>
+                    </ul>
+                </li>
+                <li><a href="soundtrack.html">SOUNDTRACK</a></li>
+                <li><a href="soundtrack.html" class="zero-soundtrack">ZERO SOUNDTRACK</a></li>
+                <li><a href="darkside-soundtrack.html">DARKSIDE SOUNDTRACK</a></li>
+                <li><a href="zero.html">ZERO</a></li>
+                <li><a href="about.html">ABOUT</a></li>
+                <li><a href="oracle.html">ORACLE</a></li>
+            </ul>
+        </nav>
+    </div>
+    
+    <div class="zero-container">
+        <div class="zero-title" id="zero-title"></div>
+        <div class="zero-description" id="zero-description"></div>
+    </div>
+    
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Typewriter effect for ZERO title
+            const zeroTitle = document.getElementById('zero-title');
+            const titleText = 'ZERO';
+            let titleIndex = 0;
+            
+            function typeZeroTitle() {
+                if (titleIndex < titleText.length) {
+                    zeroTitle.innerHTML = titleText.substring(0, titleIndex + 1) + '<span class="typewriter-cursor">|</span>';
+                    titleIndex++;
+                    setTimeout(typeZeroTitle, 150);
+                } else {
+                    zeroTitle.innerHTML = titleText + '<span class="typewriter-cursor">|</span>';
+                    // Start description after title
+                    setTimeout(typeDescription, 1000);
+                }
+            }
+            
+            // Typewriter for description
+            const zeroDescription = document.getElementById('zero-description');
+            const descriptionText = 'Welcome to ZERO.';
+            let descIndex = 0;
+            
+            function typeDescription() {
+                if (descIndex < descriptionText.length) {
+                    zeroDescription.innerHTML = descriptionText.substring(0, descIndex + 1) + '<span class="typewriter-cursor">|</span>';
+                    descIndex++;
+                    setTimeout(typeDescription, 50);
+                } else {
+                    zeroDescription.innerHTML = descriptionText + '<span class="typewriter-cursor">|</span>';
+                }
+            }
+            
+            // Start typewriter when page loads
+            setTimeout(typeZeroTitle, 500);
+        });
+    </script>
+</body>
+</html>
+
