@@ -33,15 +33,14 @@
             position: relative;
             z-index: 1;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            padding: 50px 20px;
         }
         
         .zero-title-section {
-            position: relative;
+            position: fixed;
+            top: 30vh;
+            left: 0;
+            right: 0;
             z-index: 2;
-            margin-top: 30vh;
             text-align: center;
             padding: 0 20px;
         }
@@ -57,9 +56,11 @@
         }
         
         .description-section {
-            position: relative;
+            position: fixed;
+            top: 60vh;
+            left: 0;
+            right: 0;
             z-index: 2;
-            margin-top: 60vh;
             padding: 0 20px;
             max-width: 900px;
             margin-left: auto;
@@ -116,7 +117,7 @@
             }
             
             .zero-title-section {
-                margin-top: 25vh;
+                top: 25vh;
             }
             
             .zero-description {
@@ -124,7 +125,7 @@
             }
             
             .description-section {
-                margin-top: 50vh;
+                top: 50vh;
             }
             
         }
