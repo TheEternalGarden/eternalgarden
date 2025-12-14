@@ -38,11 +38,18 @@
             padding: 50px 20px;
         }
         
+        .zero-title-section {
+            position: relative;
+            z-index: 2;
+            margin-top: 30vh;
+            text-align: center;
+            padding: 0 20px;
+        }
+        
         .zero-title {
             font-size: 3rem;
             font-weight: 300;
             letter-spacing: 4px;
-            margin-bottom: 40px;
             font-family: 'HeliosExt', Arial, Helvetica, sans-serif;
             position: relative;
             z-index: 2;
@@ -106,6 +113,10 @@
         @media screen and (max-width: 768px) {
             .zero-title {
                 font-size: 2rem;
+            }
+            
+            .zero-title-section {
+                margin-top: 25vh;
             }
             
             .zero-description {
@@ -180,8 +191,11 @@
     </video>
     
     <div class="zero-container">
-        <div class="description-section" id="description-section">
+        <div class="zero-title-section">
             <div class="zero-title" id="zero-title"></div>
+        </div>
+        
+        <div class="description-section" id="description-section">
             <div class="description-subtitle">Description</div>
             <div class="zero-description">
                 ETERNAL GARDEN // ZERO CHRONICLES THE JOURNEY OF "TEAM ZERO", A SPECIALIZED RECON TEAM OF BIO-EVOLVED NEXUS SOLDIERS and THEIR SEARCH FOR THE ETERNAL GARDEN. UNAWARE OF THE TRUTH, LIES, AND CONSPIRACIES, TEAM ZERO IS ON A MISSION TO SAVE HUMANITY... BUT AT WHAT COST?
