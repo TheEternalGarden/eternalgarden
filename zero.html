@@ -38,56 +38,21 @@
             padding: 50px 20px;
         }
         
-        .zero-header {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 50vh;
-            text-align: center;
-        }
-        
         .zero-title {
             font-size: 3rem;
             font-weight: 300;
             letter-spacing: 4px;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             font-family: 'HeliosExt', Arial, Helvetica, sans-serif;
             position: relative;
             z-index: 2;
-        }
-        
-        .explore-button {
-            background: transparent;
-            border: 1px solid #fff;
-            color: #fff;
-            padding: 12px 40px;
-            font-size: 1rem;
-            font-weight: 300;
-            letter-spacing: 3px;
-            font-family: 'HeliosExt', Arial, Helvetica, sans-serif;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .explore-button:hover {
-            animation: bounce 0.6s ease;
-            background: rgba(255, 255, 255, 0.1);
-            border-color: #888;
-        }
-        
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            text-align: center;
         }
         
         .description-section {
             position: relative;
             z-index: 2;
-            margin-top: 20vh;
+            margin-top: 10vh;
             padding: 0 20px;
             max-width: 900px;
             margin-left: auto;
@@ -104,7 +69,7 @@
         }
         
         .zero-description {
-            font-size: 1rem;
+            font-size: 0.8rem;
             font-weight: 300;
             line-height: 1.8;
             letter-spacing: 1px;
@@ -144,17 +109,13 @@
             }
             
             .zero-description {
-                font-size: 0.9rem;
+                font-size: 0.72rem;
             }
             
             .description-section {
-                margin-top: 15vh;
+                margin-top: 8vh;
             }
             
-            .explore-button {
-                padding: 10px 30px;
-                font-size: 0.9rem;
-            }
         }
         
         @media screen and (max-width: 480px) {
@@ -163,17 +124,13 @@
             }
             
             .zero-description {
-                font-size: 0.8rem;
+                font-size: 0.64rem;
             }
             
             .description-subtitle {
                 font-size: 0.8rem;
             }
             
-            .explore-button {
-                padding: 8px 25px;
-                font-size: 0.8rem;
-            }
         }
     </style>
 </head>
@@ -223,12 +180,8 @@
     </video>
     
     <div class="zero-container">
-        <div class="zero-header">
-            <div class="zero-title" id="zero-title"></div>
-            <button class="explore-button" id="explore-button">EXPLORE</button>
-        </div>
-        
         <div class="description-section" id="description-section">
+            <div class="zero-title" id="zero-title"></div>
             <div class="description-subtitle">Description</div>
             <div class="zero-description">
                 ETERNAL GARDEN // ZERO CHRONICLES THE JOURNEY OF "TEAM ZERO", A SPECIALIZED RECON TEAM OF BIO-EVOLVED NEXUS SOLDIERS and THEIR SEARCH FOR THE ETERNAL GARDEN. UNAWARE OF THE TRUTH, LIES, AND CONSPIRACIES, TEAM ZERO IS ON A MISSION TO SAVE HUMANITY... BUT AT WHAT COST?
@@ -255,17 +208,6 @@
                     setTimeout(typeDescription, 1000);
                 }
             }
-            
-            // EXPLORE button smooth scroll functionality
-            const exploreButton = document.getElementById('explore-button');
-            const descriptionSection = document.getElementById('description-section');
-            
-            exploreButton.addEventListener('click', function() {
-                descriptionSection.scrollIntoView({ 
-                    behavior: 'smooth', 
-                    block: 'center' 
-                });
-            });
             
             // Start typewriter when page loads
             setTimeout(typeZeroTitle, 500);
