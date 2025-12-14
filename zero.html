@@ -14,15 +14,36 @@
             padding: 0;
             min-height: 100vh;
             overflow-y: auto;
+            position: relative;
+        }
+        
+        /* Background video */
+        .background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: 0;
+            opacity: 0.5;
         }
         
         .zero-container {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 50px 20px;
+        }
+        
+        .zero-header {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
-            padding: 50px 20px;
+            min-height: 50vh;
             text-align: center;
         }
         
@@ -30,16 +51,62 @@
             font-size: 3rem;
             font-weight: 300;
             letter-spacing: 4px;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             font-family: 'HeliosExt', Arial, Helvetica, sans-serif;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .explore-button {
+            background: transparent;
+            border: 1px solid #fff;
+            color: #fff;
+            padding: 12px 40px;
+            font-size: 1rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            font-family: 'HeliosExt', Arial, Helvetica, sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .explore-button:hover {
+            animation: bounce 0.6s ease;
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #888;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .description-section {
+            position: relative;
+            z-index: 2;
+            margin-top: 20vh;
+            padding: 0 20px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .description-subtitle {
+            font-size: 0.9rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            font-family: 'HeliosExt', Arial, Helvetica, sans-serif;
+            opacity: 0.8;
         }
         
         .zero-description {
             font-size: 1rem;
             font-weight: 300;
-            line-height: 1.6;
-            max-width: 800px;
-            margin-bottom: 40px;
+            line-height: 1.8;
             letter-spacing: 1px;
             font-family: 'HeliosExt', Arial, Helvetica, sans-serif;
         }
@@ -78,7 +145,15 @@
             
             .zero-description {
                 font-size: 0.9rem;
-                padding: 0 20px;
+            }
+            
+            .description-section {
+                margin-top: 15vh;
+            }
+            
+            .explore-button {
+                padding: 10px 30px;
+                font-size: 0.9rem;
             }
         }
         
@@ -88,6 +163,15 @@
             }
             
             .zero-description {
+                font-size: 0.8rem;
+            }
+            
+            .description-subtitle {
+                font-size: 0.8rem;
+            }
+            
+            .explore-button {
+                padding: 8px 25px;
                 font-size: 0.8rem;
             }
         }
@@ -132,9 +216,24 @@
         </nav>
     </div>
     
+    <!-- Background Video -->
+    <video class="background-video" autoplay loop muted playsinline>
+        <source src="media/videos/sarazero1.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    
     <div class="zero-container">
-        <div class="zero-title" id="zero-title"></div>
-        <div class="zero-description" id="zero-description"></div>
+        <div class="zero-header">
+            <div class="zero-title" id="zero-title"></div>
+            <button class="explore-button" id="explore-button">EXPLORE</button>
+        </div>
+        
+        <div class="description-section" id="description-section">
+            <div class="description-subtitle">Description</div>
+            <div class="zero-description">
+                ETERNAL GARDEN // ZERO CHRONICLES THE JOURNEY OF "TEAM ZERO", A SPECIALIZED RECON TEAM OF BIO-EVOLVED NEXUS SOLDIERS and THEIR SEARCH FOR THE ETERNAL GARDEN. UNAWARE OF THE TRUTH, LIES, AND CONSPIRACIES, TEAM ZERO IS ON A MISSION TO SAVE HUMANITY... BUT AT WHAT COST?
+            </div>
+        </div>
     </div>
     
     <script src="script.js"></script>
@@ -157,20 +256,16 @@
                 }
             }
             
-            // Typewriter for description
-            const zeroDescription = document.getElementById('zero-description');
-            const descriptionText = 'Welcome to ZERO.';
-            let descIndex = 0;
+            // EXPLORE button smooth scroll functionality
+            const exploreButton = document.getElementById('explore-button');
+            const descriptionSection = document.getElementById('description-section');
             
-            function typeDescription() {
-                if (descIndex < descriptionText.length) {
-                    zeroDescription.innerHTML = descriptionText.substring(0, descIndex + 1) + '<span class="typewriter-cursor">|</span>';
-                    descIndex++;
-                    setTimeout(typeDescription, 50);
-                } else {
-                    zeroDescription.innerHTML = descriptionText + '<span class="typewriter-cursor">|</span>';
-                }
-            }
+            exploreButton.addEventListener('click', function() {
+                descriptionSection.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'center' 
+                });
+            });
             
             // Start typewriter when page loads
             setTimeout(typeZeroTitle, 500);
